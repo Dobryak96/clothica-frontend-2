@@ -1,0 +1,37 @@
+.header {
+  background-color: var(--color-primary-light);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 20px;
+}
+
+.nav,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  font-size: 14px;
+}
+
+.actions {
+  gap: 8px;
+}
+
+.pill {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary);
+}

@@ -1,0 +1,103 @@
+:root {
+  --color-primary: #c5e1a5;
+  --color-primary-light: #d6eac0;
+  --color-surface: #f3f9ed;
+  --color-background: #f9fcf6;
+  --color-text: #000000;
+  --color-white: #ffffff;
+  --color-gray: #f2f2f2;
+  --color-error: #b70000;
+
+  --font-text: var(--font-inter), sans-serif;
+  --font-heading: var(--font-nunito-sans), sans-serif;
+
+  --radius-pill: 100px;
+  --radius-card: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-text);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 64px;
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 36px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .pageTitle {
+    font-size: 48px;
+  }
+}
+
+/* Заглушка компонента: приберіть цей клас, коли почнете верстати компонент */
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: 24px;
+  font-weight: 500;
+  border: 1px dashed var(--color-primary);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
