@@ -1,3 +1,229 @@
-.registrationForm {
+/* Обгортка форми */
+.formWrapper {
   width: 100%;
+  max-width: 386px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Вкладки */
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 27px;
+}
+
+.tab {
+  position: relative;
+  padding: 4px 0 13px;
+  color: #111;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Лінія під вкладкою */
+.tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #d2d6ce;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+/* Поява лінії при наведенні курсора */
+.tab:hover::after {
+  transform: scaleX(1);
+}
+
+/* Заголовок форми */
+.title {
+  margin: 0 0 32px;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Поля форми */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 100%;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.fieldGroup label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Поля введення */
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 43px;
+  padding: 0 8px;
+  border: 1px solid #d8dcd4;
+  border-radius: 15px;
+  outline: none;
+  background: transparent;
+  color: #222;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #a6bd8c;
+}
+
+.input::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+/* Поле пароля */
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordWrapper input {
+  padding-right: 90px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  padding: 5px;
+  border: none;
+  background: transparent;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.passwordToggle:hover {
+  color: #000;
+}
+
+/* Повідомлення про помилки */
+.error {
+  color: #d34c4c;
+  font-size: 12px;
+}
+
+/* Кнопка реєстрації */
+.submitButton {
+  width: 100%;
+  min-height: 43px;
+  margin-top: -3px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background: #c5e2a7;
+  color: #111;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submitButton:hover {
+  background: #b5d795;
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Індикатор завантаження */
+.loaderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.loader {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #777;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Анімація індикатора завантаження */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Сповіщення користувача */
+.notification {
+  margin: 0;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f1f5eb;
+  color: #526d3e;
+  font-size: 13px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* Стилі для мобільних пристроїв */
+@media (max-width: 600px) {
+  .tabs {
+    margin-bottom: 24px;
+  }
+
+  .title {
+    margin-bottom: 27px;
+    font-size: 32px;
+  }
+
+  .form {
+    gap: 19px;
+  }
+
+  .input {
+    height: 46px;
+  }
+
+  .submitButton {
+    min-height: 44px;
+  }
+}
+
+/* Стилі для маленьких екранів */
+@media (max-width: 360px) {
+  .title {
+    font-size: 29px;
+  }
+
+  .tab {
+    font-size: 13px;
+  }
+
+  .passwordToggle {
+    right: 8px;
+    font-size: 12px;
+  }
 }
