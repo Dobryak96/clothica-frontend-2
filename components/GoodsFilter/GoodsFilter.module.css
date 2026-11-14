@@ -1,0 +1,313 @@
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1023px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+/* Desktop header */
+.desktopHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 1023px) {
+  .desktopHeader {
+    display: none;
+  }
+}
+
+/* Mobile header */
+.mobileHeader {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .mobileHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+}
+
+.mobileFilterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+/* Filters wrap */
+.filtersWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (max-width: 1023px) {
+  .filtersWrap {
+    display: none;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .filtersWrapOpen {
+    display: flex;
+  }
+}
+
+.filterTitle {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.counter {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.counterDesktop {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1023px) {
+  .counterDesktop {
+    display: none;
+  }
+}
+
+.clearLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-text);
+  font-size: 12px;
+  color: var(--color-text);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.clearLink:hover {
+  opacity: 0.7;
+}
+
+/* Section */
+.section {
+  padding: 16px 0;
+  border-top: 1px solid var(--color-primary);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Category list */
+.categoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.categoryBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s;
+}
+
+.categoryBtn:hover {
+  text-decoration-color: var(--color-text);
+}
+
+.categoryBtnActive {
+  font-weight: 600;
+  text-decoration-color: var(--color-text);
+}
+
+/* Checkbox group */
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkboxBox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-primary);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.checkbox:checked + .checkboxBox {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox:checked + .checkboxBox::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 1.5px solid var(--color-white);
+  border-bottom: 1.5px solid var(--color-white);
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+/* Price */
+.priceWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.priceRange {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+.priceLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+/* Color chips */
+.colorGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.colorChip {
+  padding: 6px 12px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 12px;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.colorChip:hover {
+  background-color: var(--color-primary-light);
+}
+
+.colorChipActive {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Radio group */
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radioCircle {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.radio:checked + .radioCircle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
