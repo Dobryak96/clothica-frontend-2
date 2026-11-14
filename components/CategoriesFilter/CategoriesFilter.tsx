@@ -1,13 +1,13 @@
-import { useId, useState } from "react";
-import Loader from "@/components/Loader/Loader";
-import type { Category } from "@/types/category";
-import type { GoodsFilters } from "@/types/good";
-import CategoryFilter from "./CategoryFilter";
-import ColorFilter from "./ColorFilter";
-import GenderFilter from "./GenderFilter";
-import PriceFilter from "./PriceFilter";
-import SizeFilter from "./SizeFilter";
-import css from "./CategoriesFilter.module.css";
+import { useId, useState } from 'react';
+import Loader from '@/components/Loader/Loader';
+import type { Category } from '@/types/category';
+import type { GoodsFilters } from '@/types/good';
+import CategoryFilter from './CategoryFilter';
+import ColorFilter from './ColorFilter';
+import GenderFilter from './GenderFilter';
+import PriceFilter from './PriceFilter';
+import SizeFilter from './SizeFilter';
+import css from './CategoriesFilter.module.css';
 
 type CategoriesFilterProps = {
   filters: GoodsFilters;
@@ -52,8 +52,7 @@ export default function CategoriesFilter({
         )}
       </div>
 
-      {/* На мобільному блок фільтрів ховається в випадаючий список, від 768px завжди розгорнутий */}
-      <div className={`${css.dropdown} ${isOpen ? css.open : ""}`}>
+      <div className={`${css.dropdown} ${isOpen ? css.open : ''}`}>
         <button
           type="button"
           className={css.toggle}
@@ -84,33 +83,23 @@ export default function CategoriesFilter({
           <div className={css.groups}>
             <CategoryFilter
               categories={categories}
-              selectedCategory={filters.category ?? null}
+              selectedCategory={filters.category}
               isLoading={isCategoriesLoading}
-              onChange={(category) =>
-                onChange({ category: category ?? undefined })
-              }
+              onChange={(category) => onChange({ category })}
             />
-            <SizeFilter
-              selectedSizes={filters.sizes ?? []}
-              onChange={(sizes) => onChange({ sizes })}
-            />
+            <SizeFilter selectedSizes={filters.sizes} onChange={(sizes) => onChange({ sizes })} />
             <PriceFilter
-              minPrice={filters.minPrice ?? null}
-              maxPrice={filters.maxPrice ?? null}
-              onChange={({ minPrice, maxPrice }) =>
-                onChange({
-                  minPrice: minPrice ?? undefined,
-                  maxPrice: maxPrice ?? undefined,
-                })
-              }
+              minPrice={filters.minPrice}
+              maxPrice={filters.maxPrice}
+              onChange={(range) => onChange(range)}
             />
             <ColorFilter
-              selectedColors={filters.colors ?? []}
+              selectedColors={filters.colors}
               onChange={(colors) => onChange({ colors })}
             />
             <GenderFilter
-              selectedGender={filters.gender ?? null}
-              onChange={(gender) => onChange({ gender: gender ?? undefined })}
+              selectedGender={filters.gender}
+              onChange={(gender) => onChange({ gender })}
             />
           </div>
         </div>

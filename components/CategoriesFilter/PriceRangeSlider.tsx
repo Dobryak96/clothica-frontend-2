@@ -19,7 +19,6 @@ export default function PriceRangeSlider({
   onChange,
 }: PriceRangeSliderProps) {
   const span = max - min;
-  // Якщо обидва повзунки збігаються біля правого краю, верхнім має бути лівий, інакше його не зрушити
   const isLowOnTop = lowValue > min + span / 2;
 
   const handleLowChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -5,7 +5,6 @@ type GoodStatsProps = {
   feedbacksCount: number;
 };
 
-// Поки бекенд не віддає рейтинг, на його місці показуємо прочерк, щоб розмітка збігалася з макетом
 const RATING_FALLBACK = '—';
 
 const StarIcon = () => (

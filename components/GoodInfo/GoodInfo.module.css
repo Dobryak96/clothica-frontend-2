@@ -18,7 +18,6 @@
   object-fit: cover;
 }
 
-/* Мобільний і планшет: назва, рейтинг, ціна одна під одною */
 .info {
   display: grid;
   flex-grow: 1;
@@ -80,7 +79,6 @@
   border-color: #6e6e6e;
 }
 
-/* Десктоп: назва і ціна в одному рядку, рейтинг під ними */
 @media screen and (min-width: 1440px) {
   .info {
     grid-template-columns: minmax(0, 1fr) auto;

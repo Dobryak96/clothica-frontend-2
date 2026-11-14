@@ -11,8 +11,6 @@ export const GENDER_OPTIONS: ReadonlyArray<{ value: Gender | null; label: string
   { value: 'unisex', label: 'Унісекс' },
 ];
 
-// label: текст чипа з макета; value: те, що йде в URL і в запит GET /goods?color=...
-// Бекенд із фільтром за кольором ще не змерджений, тому значення value треба звірити з його swagger
 export const COLOR_OPTIONS: ReadonlyArray<{ value: string; label: string }> = [
   { value: 'білий', label: 'Білий' },
   { value: 'чорний', label: 'чорний' },
@@ -29,11 +27,8 @@ export const DESKTOP_MEDIA_QUERY = '(min-width: 1440px)';
 
 export const PRICE_DEBOUNCE_MS = 600;
 
-// Межі слайдера ціни. Зараз найдорожчий товар у каталозі коштує 5299 грн.
-// Правий край слайдера означає "без верхньої межі", тому дорожчі товари теж потраплять у вибірку.
 export const PRICE_MIN = 0;
 export const PRICE_MAX = 6000;
 export const PRICE_STEP = 100;
 
-// Максимум, який дозволяє бекенд для GET /api/categories
 export const CATEGORIES_PER_PAGE = 20;

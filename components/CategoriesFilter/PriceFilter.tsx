@@ -20,7 +20,6 @@ const toLowValue = (price: number | null): number => (price === null ? PRICE_MIN
 
 const toHighValue = (price: number | null): number => (price === null ? PRICE_MAX : clamp(price));
 
-// Крайнє положення повзунка означає "без обмеження", тому в URL і запит такі значення не потрапляють
 const toMinPrice = (value: number): number | null => (value <= PRICE_MIN ? null : value);
 
 const toMaxPrice = (value: number): number | null => (value >= PRICE_MAX ? null : value);
@@ -30,7 +29,6 @@ export default function PriceFilter({ minPrice, maxPrice, onChange }: PriceFilte
   const [highValue, setHighValue] = useState(toHighValue(maxPrice));
   const committedRangeRef = useRef<PriceRange>({ minPrice, maxPrice });
 
-  // Запит за товарами виконуємо лише після паузи, а не під час перетягування повзунка
   const { run: scheduleCommit, cancel: cancelCommit } = useDebouncedCallback(
     (nextLow: number, nextHigh: number) => {
       const range = { minPrice: toMinPrice(nextLow), maxPrice: toMaxPrice(nextHigh) };
@@ -41,7 +39,6 @@ export default function PriceFilter({ minPrice, maxPrice, onChange }: PriceFilte
     PRICE_DEBOUNCE_MS,
   );
 
-  // Синхронізуємо повзунки, якщо діапазон змінився ззовні (наприклад, "Очистити всі")
   useEffect(() => {
     const committed = committedRangeRef.current;
     if (committed.minPrice === minPrice && committed.maxPrice === maxPrice) return;

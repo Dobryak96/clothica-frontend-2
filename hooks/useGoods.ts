@@ -36,7 +36,6 @@ export const useGoods = (filters: GoodsFilters, perPage: number | null) => {
   const filtersKey = serializeFilters(filters).toString();
   const activeFilters = useMemo(() => parseFilters(new URLSearchParams(filtersKey)), [filtersKey]);
 
-  // Перша порція: виконується при зміні фільтрів, розміру порції або ручному reload
   useEffect(() => {
     if (perPage === null) return;
 

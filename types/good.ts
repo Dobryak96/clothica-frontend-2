@@ -1,44 +1,38 @@
-export interface GoodPrice {
-  value: number;
-  currency: string;
-}
-export interface GoodFeedback {
-  _id: string;
-  user: string;
-  rating: number;
-  comment: string;
-  createdAt: string;
-}
-export interface Good {
+export type Size = 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
+
+export type Gender = 'women' | 'man' | 'unisex';
+
+export type Good = {
   _id: string;
   name: string;
   category: string;
   image: string;
-  price: GoodPrice;
-  size: string[];
-  description: string;
+  price: {
+    value: number;
+    currency: string;
+  };
+  size: Size[];
+  gender: Gender;
+  description?: string;
   prevDescription?: string;
-  characteristics?: Record<string, string>;
-  gender: "women" | "man" | "unisex";
-  feedbacks: GoodFeedback[];
-  rating: number;
-  reviewsCount: number;
-  colors?: string[];
-}
-export interface GoodsFilters {
-  category?: string;
-  search?: string;
-  sizes?: string[];
-  minPrice?: number;
-  maxPrice?: number;
-  colors?: string[];
-  gender?: string;
-}
-export type Gender = string;
-export type Size = string;
-export interface GoodsResponse {
-  goods: Good[];
-  totalItems: number;
+  characteristics?: string[];
+  feedbacks?: string[];
+  rating?: number;
+};
+
+export type GoodsResponse = {
   page: number;
+  perPage: number;
+  totalItems: number;
   totalPages: number;
-}
+  goods: Good[];
+};
+
+export type GoodsFilters = {
+  category: string | null;
+  sizes: Size[];
+  colors: string[];
+  gender: Gender | null;
+  minPrice: number | null;
+  maxPrice: number | null;
+};
