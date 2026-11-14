@@ -1,7 +1,7 @@
-import { api } from '@/lib/api/api';
-import { CATEGORIES_PER_PAGE } from '@/lib/constants/goods';
-import type { CategoriesResponse, Category } from '@/types/category';
-import type { GoodsFilters, GoodsResponse } from '@/types/good';
+import { api } from "@/lib/api/api";
+import { CATEGORIES_PER_PAGE } from "@/lib/constants/goods";
+import type { CategoriesResponse, Category } from "@/types/category";
+import type { GoodsFilters, GoodsResponse } from "@/types/good";
 
 type FetchGoodsParams = GoodsFilters & {
   page: number;
@@ -9,16 +9,25 @@ type FetchGoodsParams = GoodsFilters & {
 };
 
 export const fetchGoods = async (
-  { page, perPage, category, sizes, colors, gender, minPrice, maxPrice }: FetchGoodsParams,
+  {
+    page,
+    perPage,
+    category,
+    sizes,
+    colors,
+    gender,
+    minPrice,
+    maxPrice,
+  }: FetchGoodsParams,
   signal?: AbortSignal,
 ): Promise<GoodsResponse> => {
-  const { data } = await api.get<GoodsResponse>('/goods', {
+  const { data } = await api.get<GoodsResponse>("/goods", {
     params: {
       page,
       perPage,
       category: category ?? undefined,
-      size: sizes.length > 0 ? sizes.join(',') : undefined,
-      color: colors.length > 0 ? colors.join(',') : undefined,
+      size: sizes?.length ? sizes.join(",") : undefined,
+      color: colors?.length ? colors.join(",") : undefined,
       gender: gender ?? undefined,
       minPrice: minPrice ?? undefined,
       maxPrice: maxPrice ?? undefined,
@@ -29,8 +38,10 @@ export const fetchGoods = async (
   return data;
 };
 
-export const fetchCategories = async (signal?: AbortSignal): Promise<Category[]> => {
-  const { data } = await api.get<CategoriesResponse>('/categories', {
+export const fetchCategories = async (
+  signal?: AbortSignal,
+): Promise<Category[]> => {
+  const { data } = await api.get<CategoriesResponse>("/categories", {
     params: { page: 1, perPage: CATEGORIES_PER_PAGE },
     signal,
   });
