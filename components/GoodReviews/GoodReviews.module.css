@@ -1,3 +1,127 @@
-.goodReviews {
+.reviewsSection {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 500;
+  color: #111111;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Верхняя кнопка: честные 14px для кнопки и всего текста внутри */
+.reviewBtn,
+.reviewBtn span,
+.reviewBtn p {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+}
+
+.reviewBtn {
+  background-color: #c5e1a5 !important;
+  color: #111111 !important;
+  border: none !important;
+  border-radius: 24px !important;
+  width: 100% !important;
+  padding: 12px 20px !important;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.reviewBtn:hover {
+  background-color: #b5d690 !important;
+}
+
+/* Контейнер заглушки */
+.emptyWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.emptyWrapper>* {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Кнопка внутри карточки-заглушки: честные 14px для кнопки и текста внутри */
+.emptyWrapper button,
+.emptyWrapper button span,
+.emptyWrapper button p {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+}
+
+.emptyWrapper button {
+  background-color: #c5e1a5 !important;
+  color: #111111 !important;
+  border: none !important;
+  border-radius: 24px !important;
+  width: 100% !important;
+  padding: 12px 20px !important;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background-color 0.2s ease;
+}
+
+.emptyWrapper button:hover {
+  background-color: #b5d690 !important;
+}
+
+/* Планшет / Десктоп (от 769px и выше) */
+@media screen and (min-width: 769px) {
+  .reviewsSection {
+    gap: 32px;
+  }
+
+  .headerWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .reviewBtn {
+    width: fit-content !important;
+    border-radius: 100px !important;
+    padding: 6px 24px !important;
+  }
+
+  .emptyWrapper>* {
+    max-width: 704px !important;
+  }
+
+  .emptyWrapper button {
+    width: fit-content !important;
+    border-radius: 100px !important;
+    padding: 6px 24px !important;
+  }
 }

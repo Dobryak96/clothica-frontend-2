@@ -1,3 +1,180 @@
-.reviewForm {
+/* Оверлей по макету: #000000 с прозрачностью 25% */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Модальное окно: строго 335px для мобильного макета, цвет #F9FCF6 */
+.modalContent {
+  background-color: #f9fcf6;
+  border-radius: 16px;
   width: 100%;
+  max-width: 335px;
+  padding: 24px 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  position: relative;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+/* Кнопка закрытия (крестик) */
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #111111;
+  padding: 4px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: 500;
+  color: #111111;
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 400;
+  color: #111111;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9fcf6;
+  color: #111111;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #111111;
+  background-color: #f9fcf6;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.ratingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.stars {
+  display: flex;
+  gap: 6px;
+  font-size: 24px;
+  /* Точный размер звезд по фигме (24x24) */
+  cursor: pointer;
+  line-height: 1;
+}
+
+.star {
+  color: #111111;
+  user-select: none;
+  transition: transform 0.1s ease;
+}
+
+.star:hover {
+  transform: scale(1.1);
+}
+
+/* Кнопка отправки для мобилки (на всю ширину, высота 36px) */
+.submitBtn {
+  display: block;
+  width: 100%;
+  background-color: #c5e1a5;
+  color: #111111;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.submitBtn:hover {
+  background-color: #b5d690;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* Планшет / Десктоп */
+@media screen and (min-width: 769px) {
+  .modalContent {
+    max-width: 704px;
+    padding: 40px 48px;
+  }
+
+  .modalTitle {
+    font-size: 28px;
+  }
+
+  .textarea {
+    min-height: 120px;
+  }
+
+  /* Кнопка для десктопа/планшета по параметрам фигмы */
+  .submitBtn {
+    width: fit-content;
+    min-width: unset;
+    margin: 0 auto;
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
 }
