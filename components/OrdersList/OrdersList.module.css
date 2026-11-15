@@ -1,3 +1,26 @@
 .ordersList {
   width: 100%;
 }
+.h1 {
+  font-size: 20px;
+}
+.generalWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.outerWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.innerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+.bigText {
+  font-weight: 400;
+  font-size: 16px;
+}
