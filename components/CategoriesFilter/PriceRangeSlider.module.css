@@ -1,0 +1,97 @@
+.slider {
+  --thumb-size: 18px;
+
+  position: relative;
+  width: 100%;
+  height: var(--thumb-size);
+}
+
+.track {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background-color: #d9d9d9;
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--thumb-size) / 2 + (100% - var(--thumb-size)) * var(--from));
+  right: calc(var(--thumb-size) / 2 + (100% - var(--thumb-size)) * (1 - var(--to)));
+  background-color: var(--color-text);
+  border-radius: 2px;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: none;
+  appearance: none;
+  -webkit-appearance: none;
+  pointer-events: none;
+}
+
+.onTop {
+  z-index: 2;
+}
+
+.input::-webkit-slider-runnable-track {
+  height: var(--thumb-size);
+  background: transparent;
+}
+
+.input::-moz-range-track {
+  height: var(--thumb-size);
+  background: transparent;
+}
+
+.input::-webkit-slider-thumb {
+  box-sizing: border-box;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.input::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.input:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+.input:active::-moz-range-thumb {
+  cursor: grabbing;
+}
+
+.input:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.input:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

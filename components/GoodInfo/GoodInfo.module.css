@@ -1,3 +1,94 @@
-.goodInfo {
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.imageWrapper {
+  position: relative;
   width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--color-gray);
+  border-radius: var(--radius-card);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.info {
+  display: grid;
+  flex-grow: 1;
+  grid-template-areas:
+    'name'
+    'stats'
+    'price';
+  align-content: start;
+  gap: 8px 12px;
+}
+
+.name {
+  grid-area: name;
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.stats {
+  grid-area: stats;
+}
+
+.price {
+  grid-area: price;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: var(--color-gray);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease;
+}
+
+.details:hover,
+.details:focus-visible {
+  background-color: #d9d9d9;
+  border-color: #b5b5b5;
+}
+
+.details:active {
+  color: var(--color-white);
+  background-color: #6e6e6e;
+  border-color: #6e6e6e;
+}
+
+@media screen and (min-width: 1440px) {
+  .info {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'name price'
+      'stats stats';
+  }
+
+  .price {
+    font-weight: 600;
+    white-space: nowrap;
+  }
 }

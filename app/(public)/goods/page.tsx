@@ -1,12 +1,22 @@
-import CategoriesFilter from '@/components/CategoriesFilter/CategoriesFilter';
-import GoodsList from '@/components/GoodsList/GoodsList';
+import { Suspense } from 'react';
+import type { Metadata } from 'next';
+import GoodsPage from '@/components/GoodsPage/GoodsPage';
+import Loader from '@/components/Loader/Loader';
 
-export default function GoodsPage() {
+export const metadata: Metadata = {
+  title: 'Всі товари | Clothica',
+};
+
+export default function Goods() {
   return (
-    <div className="container page">
-      <h1 className="pageTitle">Всі товари</h1>
-      <CategoriesFilter />
-      <GoodsList />
-    </div>
+    <Suspense
+      fallback={
+        <div className="container page">
+          <Loader />
+        </div>
+      }
+    >
+      <GoodsPage />
+    </Suspense>
   );
 }

@@ -1,3 +1,139 @@
 .reviewsList {
   width: 100%;
+  min-width: 0;
+}
+
+.slider :global(.swiper-wrapper) {
+  align-items: stretch;
+}
+
+.slide {
+  height: auto;
+  min-width: 0;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+.rating {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.star {
+  position: relative;
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.emptyStar {
+  opacity: 0.2;
+}
+
+.starFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+}
+
+.starFill svg {
+  display: block;
+  max-width: none;
+}
+
+.quote {
+  flex: 1;
+  margin: 0 0 32px;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -.2px;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  overflow-wrap: anywhere;
+}
+
+.author {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.product {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 150ms ease;
+}
+
+.product:hover {
+  opacity: 0.6;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 40px 10px 0 0;
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    opacity 150ms ease;
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--color-primary-light);
+}
+
+.arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.arrow:focus-visible,
+.product:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider :global(.swiper-wrapper) {
+    transition-duration: 0ms !important;
+  }
+
+  .arrow,
+  .product {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .controls {
+    padding: 10px 0;
+  }
 }
