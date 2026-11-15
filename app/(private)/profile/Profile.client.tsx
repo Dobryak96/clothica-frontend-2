@@ -11,10 +11,11 @@ import { getUserOrders } from '@/lib/api/userOrdersApi';
 import { OrderProps } from '@/types/orderList';
 import Loader from '@/components/Loader/Loader';
 import { useAuthStore } from '@/lib/store/authStore';
+import { toast } from 'sonner';
 
 export default function ProfileClientPage() {
   const [isEmpty, setIsEmpty] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [orders, setOrders] = useState<OrderProps[]>([])
   const router = useRouter();
@@ -41,10 +42,14 @@ export default function ProfileClientPage() {
     router.push("/goods")
   }
   const handleLogout = async () => {
-    await logout();
+    try {
+      await logout();
+    } catch {
+      toast.error('Сесія вже завершена');
+    }
     clearUser();
-    router.push("/")
-  }
+    router.push('/');
+  };
 
   return (
     <div className={`container page ${css.page}`}>
