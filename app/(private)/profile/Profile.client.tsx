@@ -10,6 +10,7 @@ import { logout } from '@/lib/api/logoutApi';
 import { getUserOrders } from '@/lib/api/userOrdersApi';
 import { OrderProps } from '@/types/orderList';
 import Loader from '@/components/Loader/Loader';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function ProfileClientPage() {
   const [isEmpty, setIsEmpty] = useState(false);
@@ -17,20 +18,19 @@ export default function ProfileClientPage() {
   const [isError, setIsError] = useState(false);
   const [orders, setOrders] = useState<OrderProps[]>([])
   const router = useRouter();
+  const clearUser = useAuthStore((state) => state.clearUser);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
       setIsLoading(true)
       const data = await getUserOrders()
-      if (!data || data.lenght === 0) {
+      if (!data || data.length === 0) {
         setIsEmpty(true)
       }
       setOrders((data))
-      } catch (error) {
+      } catch {
         setIsError(true)
-        console.log(error);
-        throw new Error(`error have occured: ${error}`)
       } finally {
         setIsLoading(false)
       }
@@ -42,8 +42,8 @@ export default function ProfileClientPage() {
   }
   const handleLogout = async () => {
     await logout();
+    clearUser();
     router.push("/")
-    router.refresh()
   }
 
   return (

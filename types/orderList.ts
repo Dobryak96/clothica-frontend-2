@@ -1,7 +1,7 @@
 export interface OrderProps {
-  date: string,
+  createdAt: string,
   number: string,
-  price: number,
+  total: number,
   status: string,
   _id: string, 
 }

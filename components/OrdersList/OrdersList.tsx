@@ -10,12 +10,12 @@ export default function OrdersList({orders}: OrderListProps) {
           {orders.map((order: OrderProps) => (
             <div key={order._id}>
         <div className={css.innerWrapper}>
-          <p>{order.date}</p>
+          <p>{new Date(order.createdAt).toLocaleDateString('uk-UA')}</p>
           <p className={css.bigText}>{order.number}</p>
         </div>
         <div className={css.innerWrapper}>
           <p className={css.bigText}>Сума</p>
-          <p>{order.price}</p>
+          <p>{order.total} грн</p>
         </div>
         <div className={css.innerWrapper}>
           <p className={css.bigText}>Статус</p>

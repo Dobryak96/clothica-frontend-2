@@ -1,14 +1,7 @@
-export async function getUserOrders() {
-  const response = await fetch('/orders', {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": 'application/json',
-      },
-  });
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Помилка при завантаженні ваших покупок')
-    }
-    return await response.json()
+import { api } from './api';
+import type { OrderProps } from '@/types/orderList';
+
+export async function getUserOrders(): Promise<OrderProps[]> {
+  const { data } = await api.get<OrderProps[]>('/orders');
+  return data;
 }

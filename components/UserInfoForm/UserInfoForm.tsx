@@ -20,7 +20,7 @@ export default function UserInfoForm() {
           </label>
         </div>
           <label className={css.label}>{`Номер телефону*`}
-            <input type='tel' name='tel' className={css.input} placeholder={`+38 (0__) ___-__-__`} required/>
+            <input type='tel' name='telephone' className={css.input} placeholder={`+38 (0__) ___-__-__`} required/>
           </label>
         <div className={css.outerWrapper}>
           <label className={css.label}>{`Місто доставки*`}
