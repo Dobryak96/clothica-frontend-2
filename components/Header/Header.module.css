@@ -1,37 +1,310 @@
+/* ========================================
+   HEADER — MOBILE FIRST
+======================================== */
+
 .header {
-  background-color: var(--color-primary-light);
+  position: relative;
+  z-index: 100;
+
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #d6eac0;
 }
 
-.content {
+.headerContent {
+  position: relative;
+  z-index: 11;
+
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px 24px;
-  padding-top: 16px;
-  padding-bottom: 16px;
 }
 
 .logo {
-  font-family: var(--font-heading);
-  font-size: 20px;
-}
-
-.nav,
-.actions {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 8px 24px;
+  flex-shrink: 0;
+
+  padding: 18px 0;
+}
+
+/* Navigation */
+
+.navigation {
+  display: none;
+}
+
+.navigation a {
+  font-weight: 400;
   font-size: 14px;
+  line-height: 150%;
+  color: #000;
+  text-decoration: none;
 }
 
-.actions {
-  gap: 8px;
+/* Header Actions */
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.pill {
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-primary);
+.auth {
+  display: none;
+}
+
+/* Shared Authorization Links */
+
+.auth .loginLink,
+.auth .registerLink,
+.auth .profileLink,
+.mobileAuth .loginLink,
+.mobileAuth .registerLink,
+.mobileAuth .profileLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 12px;
+  border-radius: 100px;
+
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Login */
+
+.auth .loginLink,
+.mobileAuth .loginLink {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Register / Profile */
+
+.auth .registerLink,
+.auth .profileLink,
+.mobileAuth .registerLink,
+.mobileAuth .profileLink {
+  background-color: #c5e1a5;
+}
+
+/* Mobile Authorization Borders */
+
+.mobileAuth .loginLink,
+.mobileAuth .registerLink,
+.mobileAuth .profileLink {
+  border: 1px solid transparent;
+}
+
+.mobileAuth .registerLink,
+.mobileAuth .profileLink {
+  border-color: #c5e1a5;
+}
+
+/* Burger Button */
+
+.burgerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.05);
+
+  cursor: pointer;
+}
+
+/* Cart */
+
+.cart {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  background-color: #000;
+}
+
+/* Cart Badge */
+
+.cartBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1px 3px;
+
+  border: 1px solid #b70000;
+  border-radius: 100px;
+  background-color: #b70000;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+}
+
+/* ========================================
+   MOBILE MENU
+======================================== */
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+
+  padding: 112px 20px 40px;
+
+  background-color: #d6eac0;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  overflow-y: auto;
+}
+
+.mobileMenuOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Mobile Navigation */
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+}
+
+/* Mobile Authorization */
+
+.mobileAuth {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  font-weight: 500;
+}
+
+/* ========================================
+   TABLET — 768px+
+======================================== */
+
+@media screen and (min-width: 768px) {
+  .navigation {
+    display: flex;
+    align-items: center;
+
+    font-weight: 400;
+
+    gap: 32px;
+  }
+
+  .auth {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .burgerButton,
+  .mobileMenu {
+    display: none;
+  }
+}
+
+/* ========================================
+   DESKTOP — 1440px+
+======================================== */
+
+@media screen and (min-width: 1440px) {
+  .navigation a {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .auth {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .mobileAuth {
+    gap: 16px;
+    font-weight: 500;
+  }
+
+  .auth .loginLink,
+  .auth .registerLink,
+  .auth .profileLink {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+  }
+}
+
+/* Smooth transition */
+
+.auth a,
+.mobileAuth a {
+  transition:
+    background-color 350ms ease,
+    border-color 350ms ease;
+}
+
+/* Green buttons — Register / Profile */
+
+.auth .registerLink:is(:hover, :focus-visible),
+.auth .profileLink:is(:hover, :focus-visible),
+.mobileAuth .registerLink:is(:hover, :focus-visible),
+.mobileAuth .profileLink:is(:hover, :focus-visible) {
+  background-color: #9db484;
+  border-color: #4e5a42;
+}
+
+/* Neutral buttons — Login */
+
+.auth .loginLink:is(:hover, :focus-visible),
+.mobileAuth .loginLink:is(:hover, :focus-visible) {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .auth a,
+  .mobileAuth a {
+    transition: none;
+  }
 }

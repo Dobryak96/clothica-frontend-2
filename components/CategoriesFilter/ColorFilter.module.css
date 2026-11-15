@@ -1,0 +1,36 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 12px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 1px solid #c4cbbb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease;
+}
+
+.chip:hover {
+  border-color: var(--color-text);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.selected {
+  color: var(--color-white);
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+}
