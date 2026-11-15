@@ -1,3 +1,54 @@
-.createOrderForm {
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.control {
+  background-color: var(--color-white);
+}
+
+.control:global(.input) {
+  height: 40px;
+}
+
+.control:global(.textarea) {
+  height: 180px;
+  min-height: 180px;
+}
+
+.submit {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .row {
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .submit {
+    align-self: center;
+    width: auto;
+  }
 }
