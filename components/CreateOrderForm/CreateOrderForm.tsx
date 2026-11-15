@@ -27,7 +27,7 @@ const EMPTY_VALUES: FormValues = {
   comment: '',
 };
 
-const PHONE_PATTERN = /^\+?[\d\s()-]{10,20}$/;
+const PHONE_PATTERN = /^\+380\d{9}$/;
 const REQUIRED = "Це поле обов'язкове";
 
 const validationSchema = Yup.object({
@@ -43,7 +43,11 @@ const validationSchema = Yup.object({
     .required(REQUIRED),
   phone: Yup.string()
     .trim()
-    .matches(PHONE_PATTERN, 'Невірний формат номера телефону')
+    .transform((value: string) => value.replace(/[\s()-]/g, ''))
+    .matches(PHONE_PATTERN, {
+      message: 'Невірний формат номера телефону. Очікується +380XXXXXXXXX',
+      excludeEmptyString: true,
+    })
     .required(REQUIRED),
   city: Yup.string()
     .trim()
@@ -112,7 +116,6 @@ export default function CreateOrderForm() {
       )
       .catch(() => {
         if (controller.signal.aborted) return;
-        // Profile is optional: fall back to what we already know about the user.
         setProfileValues({ firstName: user.name ?? '', phone: user.phone ?? '' });
       })
       .finally(() => {
