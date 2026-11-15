@@ -13,7 +13,7 @@ const categoryImages: Record<string, string> = {
   "Топи та майки": "/categories/tops-and-tank-tops.webp",
   "Сукні та спідниці": "/categories/dresses-and-skirts.webp",
   "Домашній та спортивний одяг": "/categories/home-and-sportswear.webp",
-  "Худі та світшоти": "/categories/hoodies-and-sweatshirts.webp",
+  "Худі та кофти": "/categories/hoodies-and-sweatshirts.webp",
   Інше: "/categories/other.webp",
 };
 
