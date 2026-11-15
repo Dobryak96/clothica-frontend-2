@@ -32,7 +32,6 @@ export const GoodReviews: React.FC<GoodReviewsProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // Закрытие по Escape и блокировка скролла фона
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsModalOpen(false);
@@ -72,7 +71,7 @@ export const GoodReviews: React.FC<GoodReviewsProps> = ({
         </div>
       )}
 
-      {/* Модальное окно */}
+      {/* Модальне */}
       {isModalOpen && (
         <ReviewForm
           productId={productId}

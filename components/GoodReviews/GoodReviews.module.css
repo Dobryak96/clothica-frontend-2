@@ -22,7 +22,6 @@
   line-height: 1.2;
 }
 
-/* Верхняя кнопка: честные 14px для кнопки и всего текста внутри */
 .reviewBtn,
 .reviewBtn span,
 .reviewBtn p {
@@ -51,7 +50,6 @@
   background-color: #b5d690 !important;
 }
 
-/* Контейнер заглушки */
 .emptyWrapper {
   width: 100%;
   display: flex;
@@ -64,7 +62,6 @@
   box-sizing: border-box !important;
 }
 
-/* Кнопка внутри карточки-заглушки: честные 14px для кнопки и текста внутри */
 .emptyWrapper button,
 .emptyWrapper button span,
 .emptyWrapper button p {
@@ -93,7 +90,6 @@
   background-color: #b5d690 !important;
 }
 
-/* Планшет / Десктоп (от 769px и выше) */
 @media screen and (min-width: 769px) {
   .reviewsSection {
     gap: 32px;

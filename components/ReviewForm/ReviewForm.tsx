@@ -13,7 +13,7 @@ interface ReviewFormProps {
 export default function ReviewForm({ productId, onReviewCreated, onClose }: ReviewFormProps) {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
-  const [rating, setRating] = useState(0); // 0 по умолчанию — контурные звёздочки ☆☆☆☆☆
+  const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -49,9 +49,9 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
   productId, 
-  author: name,         // имя уходит как author
-  description: comment, // текст отзыва уходит как description
-  rate: rating          // оценка уходит как rate
+  author: name,         
+  description: comment, 
+  rate: rating          
 }),
       });
 

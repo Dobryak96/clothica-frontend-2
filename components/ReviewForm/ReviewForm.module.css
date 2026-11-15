@@ -1,4 +1,4 @@
-/* Оверлей по макету: #000000 с прозрачностью 25% */
+
 .modalOverlay {
   position: fixed;
   inset: 0;
@@ -12,7 +12,6 @@
   overflow-y: auto;
 }
 
-/* Модальное окно: строго 335px для мобильного макета, цвет #F9FCF6 */
 .modalContent {
   background-color: #f9fcf6;
   border-radius: 16px;
@@ -25,7 +24,6 @@
   margin: auto;
 }
 
-/* Кнопка закрытия (крестик) */
 .closeBtn {
   position: absolute;
   top: 16px;
@@ -111,7 +109,6 @@
   display: flex;
   gap: 6px;
   font-size: 24px;
-  /* Точный размер звезд по фигме (24x24) */
   cursor: pointer;
   line-height: 1;
 }
@@ -126,7 +123,6 @@
   transform: scale(1.1);
 }
 
-/* Кнопка отправки для мобилки (на всю ширину, высота 36px) */
 .submitBtn {
   display: block;
   width: 100%;
@@ -154,7 +150,6 @@
   margin-bottom: 12px;
 }
 
-/* Планшет / Десктоп */
 @media screen and (min-width: 769px) {
   .modalContent {
     max-width: 704px;
@@ -169,7 +164,6 @@
     min-height: 120px;
   }
 
-  /* Кнопка для десктопа/планшета по параметрам фигмы */
   .submitBtn {
     width: fit-content;
     min-width: unset;
