@@ -1,0 +1,26 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .layout {
+    grid-template-columns: 320px minmax(0, 1fr);
+  }
+}

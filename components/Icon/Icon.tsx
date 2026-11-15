@@ -18,7 +18,8 @@ export type IconName =
   | 'star'
   | 'star-filled'
   | 'star-half'
-  | 'delete';
+  | 'delete'
+  | 'comment';
 
 type IconProps = SVGProps<SVGSVGElement> & {
   name: IconName;
