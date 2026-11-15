@@ -6,3 +6,11 @@ export type User = {
   city: string;
   postOffice: string;
 };
+
+export interface updateUserProps {
+    firstName: string,
+    secondName: string,
+    telephone: string,
+    city: string,
+    post: string,
+}
