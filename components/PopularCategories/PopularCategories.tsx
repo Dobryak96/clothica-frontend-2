@@ -3,10 +3,18 @@
 import css from "./PopularCategories.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import type { Category } from "@/types/category";
+import Image from "next/image";
 
-type Category = {
-  _id: string;
-  name: string;
+const categoryImages: Record<string, string> = {
+  "Футболки та сорочки": "/categories/t-shirts-and-shirts.webp",
+  "Штани та джинси": "/categories/pants-and-jeans.webp",
+  "Верхній одяг": "/categories/outerwear.webp",
+  "Топи та майки": "/categories/tops-and-tank-tops.webp",
+  "Сукні та спідниці": "/categories/dresses-and-skirts.webp",
+  "Домашній та спортивний одяг": "/categories/home-and-sportswear.webp",
+  "Худі та світшоти": "/categories/hoodies-and-sweatshirts.webp",
+  Інше: "/categories/other.webp",
 };
 
 export default function PopularCategories() {
@@ -47,7 +55,19 @@ export default function PopularCategories() {
       {isLoading && <p>Завантаження категорій...</p>}
       {error && <p>{error}</p>}
 
-      <p>Кількість категорій: {categories.length}</p>
+      <div className={css.categoriesGrid}>
+        {categories.slice(0, 3).map((category) => (
+          <div key={category._id}>
+            <Image
+              src={categoryImages[category.name]}
+              alt={category.name}
+              width={300}
+              height={400}
+            />
+            <p>{category.name}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

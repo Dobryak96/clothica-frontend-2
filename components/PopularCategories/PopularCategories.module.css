@@ -34,4 +34,54 @@
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.categoriesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+}
+.categoriesGrid p {
+  margin: 8px 0 0;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.categoriesGrid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.categoriesGrid > div {
+  width: calc((100% - 48px) / 3);
+}
+
+@media (max-width: 1023px) {
+  .categoriesGrid > div {
+    width: calc((100% - 24px) / 2);
+  }
+  .categoriesGrid > div:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .categoriesGrid > div {
+    width: 100%;
+  }
+
+  .categoriesGrid > div:nth-child(2) {
+    display: none;
+  }
+  .title {
+    font-size: 28px;
+  }
 }
