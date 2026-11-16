@@ -29,7 +29,11 @@ const validationSchema = Yup.object({
     .required('Введіть email'),
 });
 
-export default function Footer() {
+type FooterProps = {
+  compact?: boolean;
+};
+
+export default function Footer({ compact = false }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const formik = useFormik({
@@ -50,67 +54,70 @@ export default function Footer() {
   });
 
   return (
-    <footer className={css.footer}>
+    <footer className={compact ? `${css.footer} ${css.footerCompact}` : css.footer}>
       <div className={`container ${css.content}`}>
-        <div className={css.top}>
-          <Link href="/" className={css.logo}>
-            <Image
-              src="/icons/logo.svg"
-              width={80}
-              height={17}
-              alt="Clothica"
-            />
-          </Link>
+        {!compact && (
+          <div className={css.top}>
+            <Link href="/" className={css.logo}>
+              <Image
+                src="/icons/logo.svg"
+                width={80}
+                height={17}
+                alt="Clothica"
+              />
+            </Link>
 
-          <nav className={css.nav}>
-            <p className={css.heading}>Меню</p>
-            <ul className={css.menu}>
-              {pagesLinks.map(({ name, url }) => (
-                <li key={url}>
-                  <Link href={url}>{name}</Link>
-                </li>
-              ))}
+            <nav className={css.nav}>
+              <p className={css.heading}>Меню</p>
+              <ul className={css.menu}>
+                {pagesLinks.map(({ name, url }) => (
+                  <li key={url}>
+                    <Link href={url}>{name}</Link>
+                  </li>
+                ))}
               </ul>
-          </nav>
+            </nav>
 
-          <div className={css.subscription}>
-            <p className={css.heading}>Підписатися</p>
-            <p className={css.description}>
-              Приєднуйтесь до нашої розсилки, щоб бути в курсі новин та акцій.
-            </p>
-            <form
-              className={css.form}
-              onSubmit={formik.handleSubmit}
-              noValidate
-            >
-              <div className={css.field}>
-                <input
-                  className={css.input}
-                  type="email"
-                  placeholder="Введіть ваш email"
-                  autoComplete="email"
-                  disabled={formik.isSubmitting}
-                  {...formik.getFieldProps('email')}
-                />
-                {formik.touched.email && formik.errors.email && (
-                  <p className={css.error}>{formik.errors.email}</p>
-                )}
-              </div>
-              <button
-                className={css.submit}
-                type="submit"
-                disabled={formik.isSubmitting}
+            <div className={css.subscription}>
+              <p className={css.heading}>Підписатися</p>
+              <p className={css.description}>
+                Приєднуйтесь до нашої розсилки, щоб бути в курсі новин та акцій.
+              </p>
+              <form
+                className={css.form}
+                onSubmit={formik.handleSubmit}
+                noValidate
               >
-                {formik.isSubmitting ? 'Надсилаємо…' : 'Підписатися'}
-              </button>
-            </form>
+                <div className={css.field}>
+                  <input
+                    className={css.input}
+                    type="email"
+                    placeholder="Введіть ваш email"
+                    autoComplete="email"
+                    disabled={formik.isSubmitting}
+                    {...formik.getFieldProps('email')}
+                  />
+                  {formik.touched.email && formik.errors.email && (
+                    <p className={css.error}>{formik.errors.email}</p>
+                  )}
+                </div>
+                <button
+                  className={css.submit}
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                >
+                  {formik.isSubmitting ? 'Надсилаємо…' : 'Підписатися'}
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className={css.bottom}>
+        <div className={compact ? css.compactBottom : css.bottom}>
           <p className={css.copyright}>
             © {currentYear} Clothica. Всі права захищені.
           </p>
+          {!compact && (
           <ul className={css.socials}>
             {socialLinks.map(({ name, url, icon, width, height }) => (
               <li key={icon}>
@@ -124,7 +131,8 @@ export default function Footer() {
                 </a>
               </li>
             ))}
-          </ul>
+            </ul>
+            )}
         </div>
       </div>
     </footer>
