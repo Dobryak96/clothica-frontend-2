@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Icon from "@/components/Icon/Icon";
-import Image from "next/image";
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
