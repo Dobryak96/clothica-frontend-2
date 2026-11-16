@@ -34,24 +34,15 @@ async function fetchCategoriesPage(
   page: number,
   perPage: number,
   signal?: AbortSignal,
-  preview = false,
 ) {
-  const url = preview ? "/api/popular-categories" : "/api/categories";
-
-  const { data } = await axios.get<CategoriesResponse>(url, {
+  const { data } = await axios.get<CategoriesResponse>("/api/categories", {
     params: { page, perPage },
     signal,
   });
   return data;
 }
 
-type CategoriesListProps = {
-  preview?: boolean;
-};
-
-export default function CategoriesList({
-  preview = false,
-}: CategoriesListProps) {
+export default function CategoriesList() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [totalItems, setTotalItems] = useState(0);
   const [step, setStep] = useState(0);
@@ -59,13 +50,13 @@ export default function CategoriesList({
 
   useEffect(() => {
     const isDesktop = window.matchMedia("(min-width: 1440px)").matches;
-    const firstPortion = preview ? 3 : isDesktop ? 6 : 4;
-    setStep(preview ? 0 : isDesktop ? 3 : 2);
+    const firstPortion = isDesktop ? 6 : 4;
+    setStep(isDesktop ? 3 : 2);
 
     const controller = new AbortController();
     setIsLoading(true);
 
-    fetchCategoriesPage(1, firstPortion, controller.signal, preview)
+    fetchCategoriesPage(1, firstPortion, controller.signal)
       .then((data) => {
         setCategories(data.categories);
         setTotalItems(data.totalItems);
@@ -79,7 +70,7 @@ export default function CategoriesList({
       });
 
     return () => controller.abort();
-  }, [preview]);
+  }, []);
 
   async function handleLoadMore() {
     if (isLoading || step === 0) return;
@@ -101,7 +92,7 @@ export default function CategoriesList({
   return (
     <section className={css.categoriesList}>
       <ul className={css.list}>
-        {(preview ? categories.slice(0, 3) : categories).map((category) => (
+        {categories.map((category) => (
           <li key={category._id} className={css.categoriesListItem}>
             <Link
               href={`/goods?category=${category._id}`}
@@ -123,13 +114,12 @@ export default function CategoriesList({
       </ul>
 
       {isLoading && categories.length === 0 && <Loader />}
-      {!preview && (
-        <Pagination
-          hasMore={hasMore}
-          isLoading={isLoading}
-          onLoadMore={handleLoadMore}
-        />
-      )}
+
+      <Pagination
+        hasMore={hasMore}
+        isLoading={isLoading}
+        onLoadMore={handleLoadMore}
+      />
     </section>
   );
 }
