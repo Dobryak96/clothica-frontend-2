@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import Footer from '@/components/Footer/Footer';
 
 type LayoutProps = {
   children: ReactNode;
@@ -14,6 +15,7 @@ export default function AuthLayout({ children }: LayoutProps) {
         </p>
       </header>
       <main className="container">{children}</main>
+    <Footer compact/>
     </>
   );
 }
