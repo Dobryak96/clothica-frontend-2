@@ -3,44 +3,44 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCartStore } from "@/lib/store/cartStore";
+import type { Good } from "@/types/good";
 import styles from "./GoodForPurchase.module.css";
 
 
-export interface GoodItem {
-  id: number | string;
-  name: string;
-  categoryName?: string;
-  price: number;
-  rating?: number;
-  reviewsTotal?: number;
-  image?: string;
-  description?: string;
-  shortDescription?: string;
-  sizes?: string[];
-}
+export default function GoodForPurchase({ good }: { good: Good }) {
+  const router = useRouter();
+  const addItem = useCartStore((state) => state.addItem);
 
+  const rating = good.rating ?? 0;
+  const reviewsTotal = good.feedbacks?.length ?? 0;
+  const name = good.name;
+  const categoryName = "Всі товари";
+  const price = good.price.value;
+  const sizes = good.size;
 
-export default function GoodForPurchase({
-  good,
-  onAddToCart
-}: {
-  good?: GoodItem;
-  onAddToCart?: (data: { id: number | string; name: string; price: number; quantity: number; size: string }) => void;
-}) {
-  const rating = good?.rating ?? 4.5;
-  const reviewsTotal = good?.reviewsTotal ?? 10;
-  const name = good?.name ?? "Базова футболка";
-  const categoryName = good?.categoryName ?? "Всі товари";
-  const price = good?.price ?? 750;
-  const sizes = good?.sizes ?? ["XS", "S", "M", "L", "XL"];
- 
   // Локальный стейт для выбранного размера и количества
-  const [selectedSize, setSelectedSize] = useState<string>(sizes[0] || "M");
+  const [selectedSize, setSelectedSize] = useState<string>(sizes[0] ?? "");
   const [quantity, setQuantity] = useState<number>(1);
- 
-  const shortDesc = good?.shortDescription ?? "Універсальний елемент гардеробу на кожен день. Виконана з м'якої бавовни, приємна до тіла та добре тримає форму. Лаконічний дизайн дозволяє легко поєднувати футболку з джинсами, шортами чи під жакет. Ідеальний вибір для тих, хто цінує комфорт і мінімалізм.";
- 
-  const fullDesc = good?.description ?? "Базова футболка Clothica — це ідеальний вибір для тих, хто цінує комфорт, якість та універсальність. Виготовлена зі 100% натуральної бавовни, вона приємна до тіла, добре пропускає повітря та підходить для щоденного носіння у будь-яку пору року.\n\nЛаконічний дизайн без зайвих деталей робить футболку універсальною основою гардеробу: її легко поєднувати з джинсами, шортами, брюками чи навіть під піджак. Прямий крій забезпечує свободу рухів, а м'який матеріал зберігає форму навіть після багаторазових прань.";
+
+  const shortDesc = good.prevDescription;
+
+  const fullDesc = good.description;
+
+  const addToCart = () => {
+    addItem({
+      _id: good._id,
+      name: good.name,
+      image: good.image,
+      price: good.price,
+      rating,
+      feedbackCount: reviewsTotal,
+      quantity,
+      size: selectedSize,
+    });
+    setQuantity(1);
+  };
 
 
   return (
@@ -143,17 +143,8 @@ export default function GoodForPurchase({
           <div className={styles.actionsRow}>
             <button
               className={styles.addToCartBtn}
-              onClick={() => {
-                if (onAddToCart) {
-                  onAddToCart({
-                    id: good?.id ?? 1,
-                    name: name,
-                    price: price,
-                    quantity: quantity,
-                    size: selectedSize
-                  });
-                }
-              }}
+              type="button"
+              onClick={addToCart}
             >
               Додати в кошик
             </button>
@@ -167,7 +158,16 @@ export default function GoodForPurchase({
           </div>
 
 
-          <button className={styles.buyNowBtn}>Купити зараз</button>
+          <button
+            type="button"
+            className={styles.buyNowBtn}
+            onClick={() => {
+              addToCart();
+              router.push("/basket");
+            }}
+          >
+            Купити зараз
+          </button>
 
 
           <div className={styles.deliveryNote}>
@@ -186,11 +186,9 @@ export default function GoodForPurchase({
 
           <h4 className={styles.specsTitle}>Основні характеристики</h4>
           <ul className={styles.specsList}>
-            <li>Матеріал: 100% бавовна</li>
-            <li>Крій: прямий, унісекс</li>
-            <li>Горловина: круглий виріз</li>
-            <li>Догляд: машинне прання при 30°</li>
-            <li>Доступні розміри: XS–XXL</li>
+            {good.characteristics?.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>
