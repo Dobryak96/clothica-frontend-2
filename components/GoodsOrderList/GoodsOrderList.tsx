@@ -3,10 +3,13 @@
 import { useCartStore } from "@/lib/store/cartStore";
 import css from "./GoodsOrderList.module.css";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function GoodsOrderList() {
   const { items, updateQuantity, removeItem } = useCartStore();
   const [isMounted, setIsMounted] = useState(false);
+  const pathname = usePathname();
+  const isOrderPage = pathname === "/order";
 
   useEffect(() => {
     setIsMounted(true);
@@ -14,7 +17,7 @@ export default function GoodsOrderList() {
   if (!isMounted) return null;
 
   const subtotal = items.reduce(
-    (sum, item) => sum + item.price.value * item.quantity,
+    (sum, item) => sum + (item.price?.value ?? 0) * item.quantity,
     0,
   );
 
@@ -59,8 +62,8 @@ export default function GoodsOrderList() {
             <div className={css.controls}>
                <p className={css.price}>
                 {formatPrice(
-                  item.price.value * item.quantity,
-                  item.price.currency,
+                  (item.price?.value ?? 0) * item.quantity,
+                  item.price?.currency,
                 )}
               </p>
               <input
@@ -100,9 +103,9 @@ export default function GoodsOrderList() {
 
         <div className={css.summaryRow}>
           <span>Доставка</span>
-          <span className={css.summaryValue}>
+          {(!isOrderPage || isFreeDelivery) && (<span className={css.summaryValue}>
             {isFreeDelivery ? "Безкоштовна" : "За тарифами перевізника"}
-          </span>
+          </span>)}
         </div>
 
         <div className={css.totalRow}>
