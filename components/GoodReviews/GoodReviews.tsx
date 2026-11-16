@@ -39,7 +39,7 @@ export const GoodReviews: React.FC<GoodReviewsProps> = ({
       const res = await fetch(`/api/feedbacks?productId=${productId}`);
       if (res.ok) {
         const data = await res.json();
-        setReviews(Array.isArray(data) ? data : data.feedbacks || []);
+        setReviews(Array.isArray(data) ? data : data.data || []);
       }
     } catch (error) {
       console.error('Error fetching reviews:', error);

@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 24px;
   box-sizing: border-box;
+  padding: 16px;
 }
 
 .headerWrapper {
@@ -93,6 +94,7 @@
 @media screen and (min-width: 769px) {
   .reviewsSection {
     gap: 32px;
+    padding: 24px;
   }
 
   .headerWrapper {
@@ -119,5 +121,11 @@
     width: fit-content !important;
     border-radius: 100px !important;
     padding: 6px 24px !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .reviewsSection {
+    padding: 40px;
   }
 }

@@ -3,13 +3,26 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import styles from './ReviewForm.module.css';
 
 interface ReviewFormProps {
   productId: string;
   onReviewCreated?: () => void;
-  onClose?: () => void;
+  onClose: () => void;
 }
+
+const reviewValidationSchema = Yup.object({
+  name: Yup.string()
+    .min(2, "Ім'я занадто коротке")
+    .required("Введіть ваше ім'я"),
+  comment: Yup.string()
+    .min(10, 'Відгук повинен містити мінімум 10 символів')
+    .required('Введіть текст відгуку'),
+  rating: Yup.number()
+    .min(1, 'Будь ласка, оберіть оцінку')
+    .required('Будь ласка, оберіть оцінку'),
+});
 
 export default function ReviewForm({ productId, onReviewCreated, onClose }: ReviewFormProps) {
   const [hoverRating, setHoverRating] = useState(0);
@@ -21,10 +34,17 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
     setMounted(true);
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.body.style.overflow = 'hidden';
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [onClose]);
 
   const handleClose = () => {
     if (onClose) {
@@ -32,18 +52,14 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
     }
   };
 
-  // Инициализируем Formik
   const formik = useFormik({
     initialValues: {
       name: '',
       comment: '',
       rating: 0,
     },
+    validationSchema: reviewValidationSchema,
     onSubmit: async (values, { resetForm }) => {
-      if (values.rating === 0) {
-        setError('Будь ласка, оберіть оцінку');
-        return;
-      }
       setLoading(true);
       setError('');
 
@@ -82,13 +98,14 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
   return ReactDOM.createPortal(
     <div className={styles.modalOverlay} onClick={handleClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeBtn} onClick={handleClose} type="button" aria-label="Close">
+        <button className={styles.closeBtn} onClick={handleClose} type="button">
           ✕
         </button>
 
         <form className={styles.form} onSubmit={formik.handleSubmit}>
           <h2 className={styles.modalTitle}>Залишити відгук</h2>
 
+          {/* Поле имени */}
           <div className={styles.fieldGroup}>
             <label className={styles.label}>Ваше ім&apos;я</label>
             <input
@@ -98,10 +115,14 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
               placeholder="Ваше ім'я"
               value={formik.values.name}
               onChange={formik.handleChange}
-              required
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.name && formik.errors.name && (
+              <p className={styles.error}>{formik.errors.name}</p>
+            )}
           </div>
 
+          {/* Поле комментария */}
           <div className={styles.fieldGroup}>
             <label className={styles.label}>Відгук</label>
             <textarea
@@ -110,10 +131,14 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
               placeholder="Ваш відгук"
               value={formik.values.comment}
               onChange={formik.handleChange}
-              required
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.comment && formik.errors.comment && (
+              <p className={styles.error}>{formik.errors.comment}</p>
+            )}
           </div>
 
+          {/* Блок выбора рейтинга (звезды) */}
           <div className={styles.ratingGroup}>
             <div className={styles.stars}>
               {[1, 2, 3, 4, 5].map((star) => {
@@ -131,6 +156,9 @@ export default function ReviewForm({ productId, onReviewCreated, onClose }: Revi
                 );
               })}
             </div>
+            {formik.touched.rating && formik.errors.rating && (
+              <p className={styles.error}>{formik.errors.rating}</p>
+            )}
           </div>
 
           {error && <p className={styles.error}>{error}</p>}
