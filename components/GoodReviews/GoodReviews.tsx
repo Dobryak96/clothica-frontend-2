@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ReviewsListRaw from '../ReviewsList/ReviewsList';
 import MessageNoInfoRaw from '../MessageNoInfo/MessageNoInfo';
 import ReviewForm from '../ReviewForm/ReviewForm';
@@ -27,10 +27,28 @@ interface GoodReviewsProps {
 }
 
 export const GoodReviews: React.FC<GoodReviewsProps> = ({
-  reviews = [],
+  reviews: initialReviews = [],
   productId,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
+
+  const fetchReviews = useCallback(async () => {
+    if (!productId) return;
+    try {
+      const res = await fetch(`/api/feedbacks?productId=${productId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setReviews(Array.isArray(data) ? data : data.feedbacks || []);
+      }
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  }, [productId]);
+
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -71,12 +89,14 @@ export const GoodReviews: React.FC<GoodReviewsProps> = ({
         </div>
       )}
 
-      {/* Модальне */}
       {isModalOpen && (
         <ReviewForm
           productId={productId}
           onClose={() => setIsModalOpen(false)}
-          onReviewCreated={() => setIsModalOpen(false)}
+          onReviewCreated={() => {
+            setIsModalOpen(false);
+            fetchReviews();
+          }}
         />
       )}
     </section>
