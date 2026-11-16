@@ -1,3 +1,169 @@
 .popularGoods {
   width: 100%;
 }
+
+.popularGoods {
+  padding: 48px 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.allGoodsBtn {
+  width: 108px;
+  height: 36px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 335 / 412;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 54px;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 18px;
+  overflow: hidden;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.detailsBtn {
+  margin-top: auto;
+  width: 100%;
+  height: 40px;
+}
+
+.sliderWrapper {
+  position: relative;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.pagination {
+  position: relative;
+  left: 0 !important;
+  transform: none !important;
+  margin: 0;
+}
+
+.pagination :global(.swiper-pagination-bullet) {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #000;
+  opacity: 0.2;
+}
+
+.pagination :global(.swiper-pagination-bullet-active) {
+  opacity: 1;
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .popularGoods {
+    padding: 48px 0;
+  }
+
+  .controls {
+    justify-content: center;
+  }
+
+  .navButtons {
+    position: static;
+  }
+
+  .prevBtn,
+  .nextBtn {
+    position: absolute;
+    top: 206px;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+
+  .prevBtn {
+    left: -20px;
+  }
+
+  .nextBtn {
+    right: -20px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .popularGoods {
+    padding: 80px 0;
+  }
+}
