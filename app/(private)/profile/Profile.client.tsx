@@ -55,12 +55,16 @@ export default function ProfileClientPage() {
     <div className={`container page ${css.page}`}>
       <h1 className="pageTitle">Кабінет</h1>
       <div className={css.wrapper}>
+        <div className={css.itemA}>
         {isLoading ? <Loader /> :
           isError ? <h2 className={css.error}>Виникла помилка при спробі завантажити ваші закази</h2> :
           !isEmpty ? <OrdersList orders={orders} /> :
             <MessageNoInfo message="У вас ще не було жодних замовлень! Мершій до покупок!" buttonText="До покупок" onClick={handleClick} />
-        }
-        <UserInfoForm />
+          }
+        </div>
+        <div className={css.itemB}>
+          <UserInfoForm />
+          </div>
       </div>
       <button className={css.button} onClick={handleLogout}>Вийти з кабінету</button>
     </div>
