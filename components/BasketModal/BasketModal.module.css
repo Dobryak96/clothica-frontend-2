@@ -17,8 +17,7 @@
   background-color: var(--color-background);
   border-radius: none;
   padding: 40px 64px 16px 32px;
-  max-width: 589px;
-  width: 100%;
+  width: 589px;
   max-height: 80vh;
   position: relative;
   overflow-y: auto;
@@ -26,8 +25,7 @@
 
 .header {
   display: flex;
-  width: 493px;
-  justify-content: flex-end;
+ justify-content: flex-end;
   align-items: center;
   
 }
@@ -47,6 +45,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s ease;
+  z-index: 10;
 }
 
 .buttons {
@@ -56,21 +55,25 @@
   margin-top: 24px;
   height: 36px;
   gap: 24px;
-  
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.continiueBtn,.orderBtn {
+.continiueBtn,
+.orderBtn{
   background-color: rgba(0, 0, 0, 0.05);
   color: var(--color-text);
-  width: 234.5px;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px 8px 16px;
   text-align: center;
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
   font-weight: 500;
+  border:none;
+  font-size: 16px;
+  width: 234.5px;
 }
 
 .orderBtn{

@@ -79,6 +79,7 @@ max-width: 100px;
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 0;
+  margin-right: 32px;
   white-space: nowrap;
   cursor: default;
   user-select: none;
@@ -88,8 +89,8 @@ max-width: 100px;
   display: flex;
   margin-left: auto;
   align-items: center;
-  gap: 32px;
- }
+ gap: 8px;
+}
 
 .quantityInput {
   background-color: var(--color-background);
