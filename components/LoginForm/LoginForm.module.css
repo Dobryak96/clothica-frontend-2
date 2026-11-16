@@ -1,3 +1,152 @@
-.loginForm {
+.formWrapper {
   width: 100%;
+  max-width: 386px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 27px;
+}
+
+.tab {
+  position: relative;
+  padding: 4px 0 13px;
+  color: var(--color-text);
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary-light);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.tab:hover::after,
+.activeTab::after {
+  transform: scaleX(1);
+}
+
+.title {
+  margin: 0 0 32px;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.fieldGroup label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 43px;
+  padding: 0 8px;
+  border: 1px solid var(--color-primary-light);
+  border-radius: 15px;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-text);
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+}
+
+.input::placeholder {
+  color: var(--color-text);
+  opacity: 0.5;
+}
+
+.submitButton {
+  width: 100%;
+  min-height: 43px;
+  margin-top: -3px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2 ease;
+}
+
+.submitButton:hover {
+  background: var(--color-primary-light);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error {
+  color: var(--color-error);
+  font-size: 12px;
+}
+
+
+@media (max-width: 600px) {
+  .tabs {
+    margin-bottom: 24px;
+  }
+
+  .title {
+    margin-bottom: 27px;
+    font-size: 32px;
+  }
+
+  .form {
+    gap: 19px;
+  }
+
+  .input {
+    height: 46px;
+  }
+
+  .submitButton {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 29px;
+  }
+
+  .tab {
+    font-size: 13px;
+  }
 }
