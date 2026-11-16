@@ -1,14 +1,10 @@
-/* ========================================
-   HEADER — MOBILE FIRST
-======================================== */
-
 .header {
   position: relative;
   z-index: 100;
 
   padding: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  background-color: #d6eac0;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-primary-light);
 }
 
 .headerContent {
@@ -35,10 +31,11 @@
 }
 
 .navigation a {
+  font-family: var(--font-text);
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: #000;
+  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -67,18 +64,27 @@
   justify-content: center;
 
   padding: 6px 12px;
-  border-radius: 100px;
 
-  color: #000;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+
+  font-family: var(--font-text);
+  font-weight: 500;
+  color: var(--color-text);
   text-align: center;
   text-decoration: none;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition);
 }
 
 /* Login */
 
 .auth .loginLink,
 .mobileAuth .loginLink {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--color-secondary);
 }
 
 /* Register / Profile */
@@ -87,20 +93,8 @@
 .auth .profileLink,
 .mobileAuth .registerLink,
 .mobileAuth .profileLink {
-  background-color: #c5e1a5;
-}
-
-/* Mobile Authorization Borders */
-
-.mobileAuth .loginLink,
-.mobileAuth .registerLink,
-.mobileAuth .profileLink {
-  border: 1px solid transparent;
-}
-
-.mobileAuth .registerLink,
-.mobileAuth .profileLink {
-  border-color: #c5e1a5;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 /* Burger Button */
@@ -114,9 +108,9 @@
   height: 36px;
   padding: 6px;
 
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 100px;
-  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-secondary);
 
   cursor: pointer;
 }
@@ -134,9 +128,10 @@
   height: 36px;
   padding: 6px;
 
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 100px;
-  background-color: #000;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-text);
+  color: var(--color-white);
 }
 
 /* Cart Badge */
@@ -152,19 +147,15 @@
 
   padding: 1px 3px;
 
-  border: 1px solid #b70000;
-  border-radius: 100px;
-  background-color: #b70000;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-danger);
 
   font-size: 12px;
   font-weight: 400;
   line-height: 1;
-  color: #fff;
+  color: var(--color-white);
 }
-
-/* ========================================
-   MOBILE MENU
-======================================== */
 
 .mobileMenu {
   position: fixed;
@@ -177,12 +168,16 @@
 
   padding: 112px 20px 40px;
 
-  background-color: #d6eac0;
+  background-color: var(--color-primary-light);
 
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   overflow-y: auto;
+
+  transition:
+    opacity var(--transition),
+    visibility var(--transition);
 }
 
 .mobileMenuOpen {
@@ -199,10 +194,15 @@
   align-items: center;
   gap: 32px;
 
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-text);
   font-size: 16px;
   line-height: 150%;
-  color: #000;
+  color: var(--color-text);
+}
+
+.mobileNav a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Mobile Authorization */
@@ -212,20 +212,12 @@
   flex-direction: column;
   align-items: stretch;
   gap: 16px;
-  font-weight: 500;
 }
-
-/* ========================================
-   TABLET — 768px+
-======================================== */
 
 @media screen and (min-width: 768px) {
   .navigation {
     display: flex;
     align-items: center;
-
-    font-weight: 400;
-
     gap: 32px;
   }
 
@@ -235,7 +227,6 @@
     gap: 16px;
 
     font-size: 14px;
-    font-weight: 500;
   }
 
   .burgerButton,
@@ -244,67 +235,38 @@
   }
 }
 
-/* ========================================
-   DESKTOP — 1440px+
-======================================== */
-
 @media screen and (min-width: 1440px) {
   .navigation a {
-    font-weight: 400;
     font-size: 16px;
   }
 
   .auth {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .mobileAuth {
-    gap: 16px;
-    font-weight: 500;
-  }
-
-  .auth .loginLink,
-  .auth .registerLink,
-  .auth .profileLink {
-    font-weight: 500;
     font-size: 16px;
-    line-height: 150%;
   }
 }
 
-/* Smooth transition */
-
-.auth a,
-.mobileAuth a {
-  transition:
-    background-color 350ms ease,
-    border-color 350ms ease;
-}
-
-/* Green buttons — Register / Profile */
+/* Register / Profile */
 
 .auth .registerLink:is(:hover, :focus-visible),
 .auth .profileLink:is(:hover, :focus-visible),
 .mobileAuth .registerLink:is(:hover, :focus-visible),
 .mobileAuth .profileLink:is(:hover, :focus-visible) {
-  background-color: #9db484;
-  border-color: #4e5a42;
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover-border);
 }
 
-/* Neutral buttons — Login */
+/* Login */
 
 .auth .loginLink:is(:hover, :focus-visible),
 .mobileAuth .loginLink:is(:hover, :focus-visible) {
-  background-color: rgba(0, 0, 0, 0.15);
-  border-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover-border);
 }
-
-/* Accessibility */
 
 @media (prefers-reduced-motion: reduce) {
   .auth a,
-  .mobileAuth a {
+  .mobileAuth a,
+  .mobileMenu {
     transition: none;
   }
 }

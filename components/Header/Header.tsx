@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Icon from "@/components/Icon/Icon";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
@@ -9,42 +10,6 @@ import { useAuthStore } from "@/lib/store/authStore";
 import css from "./Header.module.css";
 
 export default function Header() {
-  /**
-   * TODO (AUTH INTEGRATION):
-   *
-   * Owner: Developer responsible for Authentication/Profile.
-   *
-   * Zustand store:
-   * @/lib/store/authStore
-   *
-   * Expected behavior:
-   *
-   * 1. After successful login or registration:
-   *    update user in authStore.
-   *
-   * 2. When user !== null:
-   *    Header displays "Кабінет".
-   *
-   * 3. When user === null:
-   *    Header displays "Вхід" and "Реєстрація".
-   *
-   * 4. On logout:
-   *    invalidate backend session and reset authStore.
-   *
-   * 5. Restore authentication state after page refresh.
-   *
-   * 6. Protect private routes independently of Header.
-   *
-   * Required routes:
-   * /auth/login
-   * /auth/register
-   * /profile
-   *
-   * Note:
-   * Header does not perform login, registration or logout.
-   * It only reacts to authStore state changes.
-   */
-
   const user = useAuthStore((state) => state.user);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,44 +17,6 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-
-  /**
-   * TODO (CART INTEGRATION):
-   *
-   * Owner: Developer responsible for Cart functionality.
-   *
-   * 1. Create or connect Zustand store:
-   *    @/lib/store/cartStore
-   *
-   * 2. Cart store should expose:
-   *    - items: CartItem[]
-   *    - addItem()
-   *    - removeItem()
-   *    - updateQuantity()
-   *
-   * 3. Expected CartItem structure:
-   *    {
-   *      productId: string;
-   *      quantity: number;
-   *    }
-   *
-   * 4. Replace temporary cartCount with selector:
-   *
-   *    const cartCount = useCartStore((state) =>
-   *      state.items.reduce(
-   *        (total, item) => total + item.quantity,
-   *        0
-   *      )
-   *    );
-   *
-   * 5. Ensure cart data is synchronized with backend
-   *    if the API provides persistent cart storage.
-   *
-   * 6. Cart route: /basket
-   *
-   * Header only displays the total quantity.
-   * Product and Cart components manage cart mutations.
-   */
 
   const cartCount = 0;
   const pathname = usePathname();
@@ -227,13 +154,7 @@ export default function Header() {
           aria-label="Clothica — головна сторінка"
           onClick={() => closeMenu()}
         >
-          <Image
-            src="/icons/company-logo.svg"
-            alt="Clothica"
-            width={84}
-            height={36}
-            priority
-          />
+          <Icon name="logo" width={84} height={36} />
         </Link>
 
         {/* Navigation */}
@@ -280,12 +201,7 @@ export default function Header() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
           >
-            <Image
-              src={isMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
-              alt=""
-              width={24}
-              height={24}
-            />
+            <Icon name={isMenuOpen ? "close" : "menu"} size={24} />
           </button>
 
           {/* Cart */}
@@ -295,12 +211,7 @@ export default function Header() {
             aria-label={`Кошик, товарів: ${cartCount}`}
             onClick={() => closeMenu()}
           >
-            <Image
-              src="/icons/shopping_cart.svg"
-              alt=""
-              width={24}
-              height={24}
-            />
+            <Icon name="shopping-cart" size={24} />
 
             {cartCount > 0 && (
               <span className={css.cartBadge}>{cartCount}</span>
