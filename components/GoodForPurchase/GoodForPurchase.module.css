@@ -1,3 +1,392 @@
-.goodForPurchase {
+/* ==========================================
+   1. MOBILE & BASE STYLES
+   ========================================== */
+.purchaseSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111;
+}
+
+
+.imageContainer {
+  width: 100%;
+  min-height: 350px;
+  background-color: #f0f4ec;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.placeholderBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #728c66;
+  font-weight: 500;
+}
+
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+
+/* Хлібні крошки */
+.breadcrumbs {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.breadcrumbSeparator {
+  color: #999;
+}
+
+
+.breadcrumbCurrent {
+  font-weight: 600;
+  color: #111;
+}
+
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+
+.price {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+}
+
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: #dcdcdc;
+}
+
+
+.ratingWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+
+.starsContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.starWrapper {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+
+.starFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+
+.ratingText {
+  color: #4b5563;
+}
+
+
+.shortDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+
+.purchaseForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+
+.select {
+  width: 100%;
+  height: 48px;
+  padding: 0 20px;
+  padding-right: 48px;
+  border: 1px solid #dcdcdc;
+  border-radius: 16px;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.2s;
+}
+
+
+.select:hover,
+.select:focus {
+  border-color: #b5c4a5;
+}
+
+
+.selectIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
+.actionsRow {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  width: 100%;
+}
+
+
+.addToCartBtn {
+  flex: 1;
+  height: 40px;
+  background-color: #cfe2bc;
+  color: #111;
+  border: none;
+  border-radius: 9999px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+
+.addToCartBtn:hover {
+  background-color: #b7d49b;
+}
+
+
+.quantityInput {
+  width: 64px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 16px;
+  background-color: #fff;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+
+.buyNowBtn {
+  width: 100%;
+  height: 40px;
+  background-color: #e5e8e0;
+  color: #111;
+  border: none;
+  border-radius: 9999px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+
+.buyNowBtn:hover {
+  background-color: #d4d8ce;
+}
+
+
+.deliveryNote {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 4px;
+}
+
+
+.detailsSection {
+  margin-top: 16px;
+  border-top: 1px solid #e2e8dc;
+  padding-top: 16px;
+}
+
+
+.detailsTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+
+.detailsText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 16px;
+  white-space: pre-line;
+}
+
+
+.specsTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+
+.specsList {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+
+
+/* ==========================================
+   2. TABLET & SMALL LAPTOP (від 768px)
+   ========================================== */
+@media (min-width: 768px) {
+  .purchaseSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 24px;
+    align-items: start;
+  }
+
+
+ .imageContainer {
+   min-height: 450px;
+   position: sticky;
+   top: 24px;
+   align-self: start;
+ }
+
+
+  .detailsSection {
+    grid-column: 1 / -1;
+  }
+}
+
+
+
+
+/* ==========================================
+   3. DESKTOP (від 1440px)
+   ========================================== */
+@media (min-width: 1440px) {
+  .purchaseSection {
+    grid-template-columns: 520px 1fr;
+    gap: 48px;
+    max-width: 1440px;
+    padding: 40px;
+    align-items: start;
+  }
+
+
+  .imageContainer {
+    min-height: 550px;
+    border-radius: 16px;
+    position: sticky;
+      top: 40px;
+      align-self: start;
+  }
 }
