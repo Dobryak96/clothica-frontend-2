@@ -1,0 +1,10 @@
+.pageTitle {
+  text-align: start;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 36px;
+}
+
+div.wrapper {
+  padding-bottom: 64px;
+  padding-top: 64px;
+}

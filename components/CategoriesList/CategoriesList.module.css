@@ -1,3 +1,48 @@
 .categoriesList {
   width: 100%;
 }
+
+.list {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 1fr;
+}
+
+.categoriesListLink {
+  display: block;
+  transition: transform var(--transition);
+}
+
+.categoriesListLink:hover,
+.categoriesListLink:focus-visible {
+  transform: scale(1.03);
+}
+
+.categoriesListImageWrapper {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+.categoriesListImage {
+  object-fit: cover;
+}
+
+.categoriesListName {
+  margin-top: 24px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1440px) {
+  .list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
