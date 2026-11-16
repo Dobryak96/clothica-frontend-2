@@ -1,3 +1,90 @@
 .popularCategories {
   width: 100%;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.categoriesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+}
+.categoriesGrid p {
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.categoriesGrid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.categoriesGrid > div {
+  width: 100%;
+}
+
+.categoriesGrid > div:nth-child(n + 2) {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+
+  .categoriesGrid > div {
+    width: calc((100% - 24px) / 2);
+  }
+
+  .categoriesGrid > div:nth-child(2) {
+    display: block;
+  }
+}
+
+@media (min-width: 1440px) {
+  .categoriesGrid > div {
+    width: calc((100% - 48px) / 3);
+  }
+
+  .categoriesGrid > div:nth-child(3) {
+    display: block;
+  }
+}
