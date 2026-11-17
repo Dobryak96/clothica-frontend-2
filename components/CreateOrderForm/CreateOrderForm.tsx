@@ -28,16 +28,20 @@ const EMPTY_VALUES: FormValues = {
 };
 
 const PHONE_PATTERN = /^\+380\d{9}$/;
+const CYRILLIC_PATTERN = /^\p{Script=Cyrillic}[\p{Script=Cyrillic}'’ʼ\- ]*$/u;
+const CYRILLIC_MESSAGE = 'Дозволено введення лише кирилицею';
 const REQUIRED = "Це поле обов'язкове";
 
 const validationSchema = Yup.object({
   firstName: Yup.string()
     .trim()
+    .matches(CYRILLIC_PATTERN, { message: CYRILLIC_MESSAGE, excludeEmptyString: true })
     .min(2, 'Мінімум 2 символи')
     .max(32, 'Максимум 32 символи')
     .required(REQUIRED),
   lastName: Yup.string()
     .trim()
+    .matches(CYRILLIC_PATTERN, { message: CYRILLIC_MESSAGE, excludeEmptyString: true })
     .min(2, 'Мінімум 2 символи')
     .max(32, 'Максимум 32 символи')
     .required(REQUIRED),
@@ -51,6 +55,7 @@ const validationSchema = Yup.object({
     .required(REQUIRED),
   city: Yup.string()
     .trim()
+    .matches(CYRILLIC_PATTERN, { message: CYRILLIC_MESSAGE, excludeEmptyString: true })
     .min(2, 'Мінімум 2 символи')
     .max(64, 'Максимум 64 символи')
     .required(REQUIRED),
@@ -58,7 +63,8 @@ const validationSchema = Yup.object({
   comment: Yup.string().trim().max(500, 'Максимум 500 символів'),
 });
 
-const SUCCESS_MESSAGE = "Ваше замовлення створено. Чекайте на зворотний зв'язок";
+const getSuccessMessage = (number: string) =>
+  `Ваше замовлення №${number} створено. Чекайте на зворотний зв'язок`;
 
 type FieldConfig = {
   name: keyof FormValues;
@@ -146,7 +152,7 @@ export default function CreateOrderForm() {
     }
 
     try {
-      await createOrder({
+      const order = await createOrder({
         items: items.map(({ _id, size, quantity }) => ({
           good: _id,
           size: size as Size,
@@ -167,7 +173,10 @@ export default function CreateOrderForm() {
         return;
       }
 
-      toast.success(SUCCESS_MESSAGE);
+      toast.success(getSuccessMessage(order.number), {
+        duration: Infinity,
+        closeButton: true,
+      });
       resetForm();
     } catch (error) {
       setSaveError(getErrorMessage(error, 'Не вдалося оформити замовлення. Спробуйте ще раз.'));
