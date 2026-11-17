@@ -26,6 +26,7 @@ export default function PopularGoods() {
   const [isEnd, setIsEnd] = useState<boolean>(true);
 
   const swiperRef = useRef<SwiperType | null>(null);
+  const slideAfterLoadRef = useRef(false);
   const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
 
   const hasMore = goods.length < total;
@@ -82,7 +83,7 @@ export default function PopularGoods() {
         PAGE_SIZE,
       );
       if (isLoaded) {
-        requestAnimationFrame(() => swiperRef.current?.slideNext());
+        slideAfterLoadRef.current = true;
       }
       return;
     }
@@ -115,8 +116,8 @@ export default function PopularGoods() {
               dynamicMainBullets: 1,
             }}
             breakpoints={{
-              768: { slidesPerView: 2, spaceBetween: 32 },
-              1440: { slidesPerView: 4, spaceBetween: 32 },
+              768: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 32 },
+              1440: { slidesPerView: 4, slidesPerGroup: 3, spaceBetween: 32 },
             }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -124,7 +125,13 @@ export default function PopularGoods() {
             }}
             onSlideChange={syncNavigation}
             onResize={syncNavigation}
-            onSlidesLengthChange={syncNavigation}
+            onSlidesLengthChange={(swiper) => {
+              syncNavigation(swiper);
+              if (slideAfterLoadRef.current) {
+                slideAfterLoadRef.current = false;
+                swiper.slideNext();
+              }
+            }}
           >
             {goods.map((product) => (
               <SwiperSlide key={product._id}>
