@@ -42,7 +42,7 @@ export default function GoodsOrderList() {
 
             <div className={css.detailsWrapper}>
               <div className={css.info}>
-                <h3 className={css.title}>{item.name}</h3>
+                <h3 className={css.title}>{item.name.replace(/['’ʼ]/g, "")}</h3>
                 {item.size && (
                   <p className={css.subtitle}>Розмір: {item.size}</p>
                 )}
