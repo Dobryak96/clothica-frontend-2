@@ -10,7 +10,7 @@ import { api } from "@/lib/api/api";
 import { toast } from "sonner";
 
 type LoginResponse = {
-  id: string;
+  _id: string;
   name: string;
   phone: string;
 };
@@ -77,7 +77,7 @@ export default function LoginForm() {
         });
 
         setUser({
-          id: data.id,
+          id: data._id,
           name: data.name,
           phone: data.phone,
         });

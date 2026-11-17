@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Nunito_Sans } from 'next/font/google';
 import { Toaster } from 'sonner';
+import AuthSync from '@/components/AuthSync/AuthSync';
 import 'modern-normalize/modern-normalize.css';
 import './globals.css';
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children, modal }: RootLayoutProps) {
   return (
     <html lang="uk" className={`${inter.variable} ${nunitoSans.variable}`}>
       <body>
+        <AuthSync />
         {children}
         {modal}
         <Toaster position="top-right" richColors />
