@@ -65,10 +65,8 @@ export default function GoodsOrderList() {
             
             <div className={css.controls}>
                <p className={css.price}>
-                {formatPrice(
-                  (item.price?.value ?? 0) * item.quantity,
-                  item.price?.currency,
-                )}
+                {(item.price?.value ?? 0) * item.quantity}{" "}
+                {item.price?.currency ?? "грн"}
               </p>
               <input
                 type="number"
