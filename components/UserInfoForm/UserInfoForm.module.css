@@ -36,14 +36,17 @@
   margin-right: auto;
   cursor: pointer;
 }
-.button:hover,
-.button:focus {
+.button:not(:disabled):hover,
+.button:not(:disabled):focus-visible {
   border: 1px solid #4e5a42;
   background: #9db484;
 }
-.button:active {
+.button:not(:disabled):active {
   border: 1px solid #c5e1a5;
   background: #3b4331;
+}
+.buttonDisabled {
+  cursor: not-allowed;
 }
 .label {
   display: flex;
