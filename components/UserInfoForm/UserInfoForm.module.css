@@ -46,6 +46,7 @@
   background: #3b4331;
 }
 .buttonDisabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 .label {

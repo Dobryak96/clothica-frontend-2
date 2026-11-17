@@ -10,6 +10,7 @@ import { updateUserProps, type User } from '@/types/user';
 export default function UserInfoForm() {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<Record<string, string>>({});
+  const [isDirty, setIsDirty] = useState(false);
 
    const handleLatinCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,6 +29,7 @@ export default function UserInfoForm() {
   }, []);
 
   const hasErrors = Object.values(error).some((error) => error !== '');
+  const isSaveDisabled = hasErrors || !isDirty;
 
   const handleClick = async (formData: FormData) => {
     const dataObject = Object.fromEntries(formData.entries()) as unknown as updateUserProps;
@@ -46,6 +48,7 @@ export default function UserInfoForm() {
           }
           : null
       )
+      setIsDirty(false);
       toast.success('Дані збережено');
     } catch {
       toast.error('Не вдалося зберегти дані. Перевірте поля та спробуйте ще раз');
@@ -54,7 +57,7 @@ export default function UserInfoForm() {
   return <section className={css.userInfoForm}>
     <div className={css.generalWrapper}>
       <h1 className={css.h1}>Особиста інформація</h1>
-      <form key={user?._id ?? 'empty'} className={css.formWrapper} action={handleClick}>
+      <form key={user?._id ?? 'empty'} className={css.formWrapper} action={handleClick} onChange={() => setIsDirty(true)}>
         <div className={css.outerWrapper}>
           <label className={css.label}>{`Ім'я*`}
             <input type='text' name='firstName' onChange={handleLatinCheck} className={error.firstName ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше ім'я`} defaultValue={user?.name ?? ''} required/>
@@ -77,7 +80,7 @@ export default function UserInfoForm() {
             <input type='text' name='post' className={css.input} placeholder={`1`} defaultValue={user?.postOffice ?? ''} required/>
           </label>
         </div>
-        <button type='submit' className={`${css.button} ${hasErrors ? css.buttonDisabled : ''}`}  disabled={hasErrors}>Зберегти зміни</button>
+        <button type='submit' className={`${css.button} ${isSaveDisabled ? css.buttonDisabled : ''}`}  disabled={isSaveDisabled}>Зберегти зміни</button>
       </form>
     </div>
   </section>;
