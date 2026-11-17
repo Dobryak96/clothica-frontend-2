@@ -1,83 +1,99 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import { Pagination, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { GoodsCard } from "./GoodsCard";
 import Icon from "../Icon/Icon";
+import Loader from "../Loader/Loader";
 import { Product } from "../../types/goods";
 import { fetchGoods } from "@/lib/api/goodsApi";
 import css from "./PopularGoods.module.css";
 
+const PAGE_SIZE = 3;
+const INITIAL_PAGES = 2;
+
 export default function PopularGoods() {
   const [goods, setGoods] = useState<Product[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [total, setTotal] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isBeginning, setIsBeginning] = useState<boolean>(true);
+  const [isEnd, setIsEnd] = useState<boolean>(true);
 
-  const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
-  const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
   const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
 
-  const loadGoods = useCallback(
-    async (pageNum: number) => {
-      if (pageNum > 1 && (isLoading || !hasMore)) return;
-      if (pageNum === 1 && !hasMore) return;
+  const hasMore = goods.length < total;
 
-      setIsLoading(true);
+  const loadGoods = useCallback(async (page: number, perPage: number) => {
+    setIsLoading(true);
 
-      try {
-        const data = await fetchGoods({
-          page: pageNum,
-          perPage: 4,
-          sizes: [],
-        } as unknown as Parameters<typeof fetchGoods>[0]);
+    try {
+      const data = await fetchGoods({
+        page,
+        perPage,
+        category: null,
+        sizes: [],
+        colors: [],
+        gender: null,
+        minPrice: null,
+        maxPrice: null,
+      });
 
-        const responseObj = data as Record<string, unknown>;
-        const newItems: Product[] = Array.isArray(data)
-          ? data
-          : (responseObj.goods as Product[]) ||
-            (responseObj.items as Product[]) ||
-            [];
-
-        if (!Array.isArray(newItems) || newItems.length < 4) {
-          setHasMore(false);
-        }
-
-        if (Array.isArray(newItems) && newItems.length > 0) {
-          setGoods((prev) => {
-            const existingIds = new Set(prev.map((item) => item._id));
-            const uniqueNewItems = newItems.filter(
-              (item) => !existingIds.has(item._id),
-            );
-            return [...prev, ...uniqueNewItems];
-          });
-          setPage(pageNum);
-        }
-      } catch (error) {
-        console.error("Помилка завантаження товарів:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [isLoading, hasMore],
-  );
+      setGoods((prev) => {
+        const knownIds = new Set(prev.map((item) => item._id));
+        return [...prev, ...data.goods.filter((item) => !knownIds.has(item._id))];
+      });
+      setTotal(data.totalItems);
+      return true;
+    } catch {
+      toast.error("Не вдалося завантажити популярні товари");
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    loadGoods(1);
+    loadGoods(1, PAGE_SIZE * INITIAL_PAGES);
   }, [loadGoods]);
 
-  const handleNextClick = () => {
+  const syncNavigation = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  const handlePrevClick = () => {
+    swiperRef.current?.slidePrev();
+  };
+
+  const handleNextClick = async () => {
+    const swiper = swiperRef.current;
+    if (!swiper) return;
+
+    if (!swiper.isEnd) {
+      swiper.slideNext();
+      return;
+    }
+
     if (hasMore && !isLoading) {
-      loadGoods(page + 1);
+      const isLoaded = await loadGoods(
+        Math.floor(goods.length / PAGE_SIZE) + 1,
+        PAGE_SIZE,
+      );
+      if (isLoaded) {
+        requestAnimationFrame(() => swiperRef.current?.slideNext());
+      }
     }
   };
 
   return (
-    <section className={css.popularGoods}>
+    <section id="goods" className={css.popularGoods}>
       <div className={css.header}>
         <h2 className={css.title}>Популярні товари</h2>
         <Link href="/goods" className={`btn btn-secondary ${css.allGoodsBtn}`}>
@@ -85,57 +101,65 @@ export default function PopularGoods() {
         </Link>
       </div>
 
-      <div className={css.sliderWrapper}>
-        <Swiper
-          modules={[Navigation, Pagination, Keyboard]}
-          spaceBetween={24}
-          slidesPerView={1}
-          keyboard={{ enabled: true }}
-          pagination={{
-            el: paginationEl,
-            clickable: true,
-            dynamicBullets: true,
-            dynamicMainBullets: 1,
-          }}
-          navigation={{
-            prevEl,
-            nextEl,
-          }}
-          breakpoints={{
-            768: { slidesPerView: 2, spaceBetween: 32 },
-            1440: { slidesPerView: 4, spaceBetween: 32 },
-          }}
-        >
-          {goods.map((product) => (
-            <SwiperSlide key={product._id}>
-              <GoodsCard product={product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {goods.length === 0 && isLoading ? (
+        <Loader />
+      ) : (
+        <div className={css.sliderWrapper}>
+          <Swiper
+            modules={[Pagination, Keyboard]}
+            spaceBetween={24}
+            slidesPerView={1}
+            keyboard={{ enabled: true }}
+            pagination={{
+              el: paginationEl,
+              clickable: true,
+              dynamicBullets: true,
+              dynamicMainBullets: 1,
+            }}
+            breakpoints={{
+              768: { slidesPerView: 2, spaceBetween: 32 },
+              1440: { slidesPerView: 4, spaceBetween: 32 },
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              syncNavigation(swiper);
+            }}
+            onSlideChange={syncNavigation}
+            onResize={syncNavigation}
+            onSlidesLengthChange={syncNavigation}
+          >
+            {goods.map((product) => (
+              <SwiperSlide key={product._id}>
+                <GoodsCard product={product} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-        <div className={css.controls}>
-          <div ref={setPaginationEl} className={css.pagination} />
-          <div className={css.navButtons}>
-            <button
-              ref={setPrevEl}
-              type="button"
-              className={`slider-arrow ${css.prevBtn}`}
-              aria-label="Попередній слайд"
-            >
-              <Icon name="arrow-back" size={24} />
-            </button>
-            <button
-              ref={setNextEl}
-              type="button"
-              className={`slider-arrow ${css.nextBtn}`}
-              onClick={handleNextClick}
-              aria-label="Наступний слайд"
-            >
-              <Icon name="arrow-forward" size={24} />
-            </button>
+          <div className={css.controls}>
+            <div ref={setPaginationEl} className={css.pagination} />
+            <div className={css.navButtons}>
+              <button
+                type="button"
+                className={`slider-arrow ${css.prevBtn}`}
+                onClick={handlePrevClick}
+                disabled={isBeginning}
+                aria-label="Попередній слайд"
+              >
+                <Icon name="arrow-back" size={24} />
+              </button>
+              <button
+                type="button"
+                className={`slider-arrow ${css.nextBtn}`}
+                onClick={handleNextClick}
+                disabled={(isEnd && !hasMore) || isLoading}
+                aria-label="Наступний слайд"
+              >
+                <Icon name="arrow-forward" size={24} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
