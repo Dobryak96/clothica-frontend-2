@@ -62,3 +62,13 @@
       flex-direction: row;
     }
   }
+.inputError {
+  border-color: #e53935;
+}
+
+.errorText {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
