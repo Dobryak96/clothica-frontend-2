@@ -28,7 +28,7 @@ export default function GoodsPage() {
 
   return (
     <div className="container page">
-      <h1 className="pageTitle">{getTitle(filters.category, categories)}</h1>
+      <h1 className={`pageTitle ${css.title}`}>{getTitle(filters.category, categories)}</h1>
       <div className={css.layout}>
         <CategoriesFilter
           filters={filters}

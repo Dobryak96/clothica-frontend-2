@@ -28,7 +28,7 @@ export default function GoodsList({ goods, isLoading, isError, onReset, onRetry 
   if (goods.length === 0) {
     return (
       <MessageNoInfo
-        message="За вашим запитом не знайдено жодного товару"
+        message="За вашим запитом не знайдено жодних товарів, спробуйте змінити фільтри, або скинути їх"
         buttonText="Скинути фільтри"
         onClick={onReset}
       />

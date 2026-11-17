@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "../../types/goods";
+import { formatGoodName } from "@/lib/utils/formatGoodName";
 import Icon from "../Icon/Icon";
 import css from "./PopularGoods.module.css";
 
@@ -26,7 +27,7 @@ export const GoodsCard = ({ product }: GoodsCardProps) => {
 
       <div className={css.info}>
         <div className={css.cardHeader}>
-          <h3 className={css.cardTitle}>{product.name}</h3>
+          <h3 className={css.cardTitle}>{formatGoodName(product.name)}</h3>
           <span className={css.price}>
             {typeof product.price === "object"
               ? `${product.price.value} ${product.price.currency}`
