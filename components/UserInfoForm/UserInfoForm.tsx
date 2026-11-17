@@ -45,11 +45,11 @@ export default function UserInfoForm() {
       <form key={user?._id ?? 'empty'} className={css.formWrapper} action={handleClick}>
         <div className={css.outerWrapper}>
           <label className={css.label}>{`Ім'я*`}
-            <input type='text' name='firstName' onChange={handleLatinCheck} className={css.input} placeholder={`Ваше ім'я`} defaultValue={user?.name ?? ''} required/>
+            <input type='text' name='firstName' onChange={handleLatinCheck} className={error.firstName ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше ім'я`} defaultValue={user?.name ?? ''} required/>
             {error.firstName && <span className={css.errorText}>{error.firstName}</span>}
           </label>
           <label className={css.label}>{`Прізвище*`}
-            <input type='text' name='secondName' onChange={handleLatinCheck} className={css.input} placeholder={`Ваше прізвище`} defaultValue={user?.lastName ?? ''} required/>
+            <input type='text' name='secondName' onChange={handleLatinCheck} className={error.secondName ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше прізвище`} defaultValue={user?.lastName ?? ''} required/>
             {error.secondName && <span className={css.errorText}>{error.secondName}</span>}
           </label>
         </div>
@@ -58,7 +58,7 @@ export default function UserInfoForm() {
           </label>
         <div className={css.outerWrapper}>
           <label className={css.label}>{`Місто доставки*`}
-            <input type='text' name='city' onChange={handleLatinCheck} className={css.input} placeholder={`Ваше місто`} defaultValue={user?.city ?? ''} required/>
+            <input type='text' name='city' onChange={handleLatinCheck} className={error.city ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше місто`} defaultValue={user?.city ?? ''} required/>
             {error.city && <span className={css.errorText}>{error.city}</span>}
           </label>
           <label className={css.label}>{`Номер відділення Нової Пошти*`}
