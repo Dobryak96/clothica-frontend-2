@@ -29,8 +29,8 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children, modal }: RootLayoutProps) {
   return (
-    <html lang="uk">
-      <body className={`${inter.variable} ${nunitoSans.variable}`}>
+    <html lang="uk" className={`${inter.variable} ${nunitoSans.variable}`}>
+      <body>
         {children}
         {modal}
         <Toaster position="top-right" richColors />

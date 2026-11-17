@@ -47,14 +47,6 @@
 .title {
   font-size: 16px;
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.title:hover {
-  white-space: normal;
-  text-overflow: visible;
 }
 
 .subtitle {
