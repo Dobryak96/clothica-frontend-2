@@ -13,15 +13,27 @@ import Loader from '@/components/Loader/Loader';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useCartStore } from '@/lib/store/cartStore';
 import { toast } from 'sonner';
+import axios from 'axios';
 
 export default function ProfileClientPage() {
   const [isEmpty, setIsEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [orders, setOrders] = useState<OrderProps[]>([])
+
   const router = useRouter();
   const clearUser = useAuthStore((state) => state.clearUser);
   const clearCart = useCartStore((state) => state.clearCart);
+
+  const clearSessionAndRedirect = async () => {
+    try {
+      await logout();
+    } catch {
+
+    }
+    clearUser();
+    router.replace("/");
+  }
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -32,7 +44,11 @@ export default function ProfileClientPage() {
         setIsEmpty(true)
       }
       setOrders((data))
-      } catch {
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          toast.error('сессія закінчилась, увійдіть знову')
+          await clearSessionAndRedirect();
+        }
         setIsError(true)
       } finally {
         setIsLoading(false)

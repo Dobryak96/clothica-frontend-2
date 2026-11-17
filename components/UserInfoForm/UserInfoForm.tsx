@@ -34,6 +34,18 @@ export default function UserInfoForm() {
 
     try {
       await updateUser(dataObject);
+      setUser((prev) => 
+        prev
+          ? {
+            ...prev,
+            name: dataObject.firstName,
+            lastName: dataObject.secondName,
+            phone: dataObject.telephone,
+            city: dataObject.city,
+            postOffice: dataObject.post,
+          }
+          : null
+      )
       toast.success('Дані збережено');
     } catch {
       toast.error('Не вдалося зберегти дані. Перевірте поля та спробуйте ще раз');
@@ -65,7 +77,7 @@ export default function UserInfoForm() {
             <input type='text' name='post' className={css.input} placeholder={`1`} defaultValue={user?.postOffice ?? ''} required/>
           </label>
         </div>
-        <button type='submit' className={css.button} disabled={hasErrors}>Зберегти зміни</button>
+        <button type='submit' className={`${css.button} ${hasErrors ? css.buttonDisabled : ''}`}  disabled={hasErrors}>Зберегти зміни</button>
       </form>
     </div>
   </section>;
