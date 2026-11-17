@@ -51,7 +51,12 @@
 }
 .outerWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 32px;
   justify-content: space-between;
 }
+@media (min-width: 768px) {
+    .outerWrapper {
+      flex-direction: row;
+    }
+  }
