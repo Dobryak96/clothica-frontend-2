@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Good } from '@/types/good';
+import { formatGoodName } from '@/lib/utils/formatGoodName';
 import GoodStats from './GoodStats';
 import css from './GoodInfo.module.css';
 
@@ -24,7 +25,7 @@ export default function GoodInfo({ good }: GoodInfoProps) {
       </div>
 
       <div className={css.info}>
-        <h3 className={css.name}>{name}</h3>
+        <h3 className={css.name}>{formatGoodName(name)}</h3>
         <p className={css.price}>
           {price.value} {price.currency}
         </p>

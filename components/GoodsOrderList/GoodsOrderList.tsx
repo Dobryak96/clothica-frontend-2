@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCartStore } from "@/lib/store/cartStore";
+import { MAX_QUANTITY, useCartStore } from "@/lib/store/cartStore";
 import css from "./GoodsOrderList.module.css";
 import { useEffect, useState } from "react";
 
@@ -71,6 +71,7 @@ export default function GoodsOrderList() {
               <input
                 type="number"
                 min="1"
+                max={MAX_QUANTITY}
                 value={item.quantity}
                 onChange={(e) =>
                   updateQuantity(

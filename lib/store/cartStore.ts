@@ -34,6 +34,11 @@ export const calculateRating = (feedbacks: ProductFeedback[] = []): number => {
   return Number((totalRate / feedbacks.length).toFixed(1));
 };
 
+export const MAX_QUANTITY = 99;
+
+const clampQuantity = (quantity: number): number =>
+  Math.min(MAX_QUANTITY, Math.max(1, Math.floor(quantity) || 1));
+
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
@@ -49,13 +54,13 @@ export const useCartStore = create<CartState>()(
             return {
               items: state.items.map((item) =>
                 item._id === newItem._id && item.size === newItem.size
-                  ? { ...item, quantity: item.quantity + newItem.quantity }
+                  ? { ...item, quantity: clampQuantity(item.quantity + newItem.quantity) }
                   : item,
               ),
             };
           }
           return {
-            items: [...state.items, newItem],
+            items: [...state.items, { ...newItem, quantity: clampQuantity(newItem.quantity) }],
           };
         }),
       removeItem: (itemId, size) =>
@@ -71,7 +76,7 @@ export const useCartStore = create<CartState>()(
         set((state) => ({
           items: state.items.map((item) =>
             item._id === itemId && item.size === size
-              ? { ...item, quantity: Math.max(1, quantity) }
+              ? { ...item, quantity: clampQuantity(quantity) }
               : item,
           ),
         })),

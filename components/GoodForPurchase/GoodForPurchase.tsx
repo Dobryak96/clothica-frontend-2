@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCartStore } from "@/lib/store/cartStore";
+import { MAX_QUANTITY, useCartStore } from "@/lib/store/cartStore";
 import type { Good } from "@/types/good";
 import styles from "./GoodForPurchase.module.css";
 
@@ -152,7 +152,10 @@ export default function GoodForPurchase({ good }: { good: Good }) {
               type="number"
               value={quantity}
               min={1}
-              onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+              max={MAX_QUANTITY}
+              onChange={(e) =>
+                setQuantity(Math.min(MAX_QUANTITY, Math.max(1, parseInt(e.target.value) || 1)))
+              }
               className={styles.quantityInput}
             />
           </div>
