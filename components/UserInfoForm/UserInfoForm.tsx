@@ -9,12 +9,25 @@ import { updateUserProps, type User } from '@/types/user';
 
 export default function UserInfoForm() {
   const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState<Record<string, string>>({});
+
+   const handleLatinCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const hasLatin = /[a-zA-Z]/.test(value);
+
+    setError((prev) => ({
+      ...prev,
+      [name]: hasLatin ? 'Використовуйте кирилицю, латиниця заборонена' : '',
+    }));
+  };
 
   useEffect(() => {
     fetchCurrentUser()
       .then(setUser)
       .catch(() => toast.error('Не вдалося завантажити дані профілю'));
   }, []);
+
+  const hasErrors = Object.values(error).some((error) => error !== '');
 
   const handleClick = async (formData: FormData) => {
     const dataObject = Object.fromEntries(formData.entries()) as unknown as updateUserProps;
@@ -32,10 +45,12 @@ export default function UserInfoForm() {
       <form key={user?._id ?? 'empty'} className={css.formWrapper} action={handleClick}>
         <div className={css.outerWrapper}>
           <label className={css.label}>{`Ім'я*`}
-            <input type='text' name='firstName' className={css.input} placeholder={`Ваше ім'я`} defaultValue={user?.name ?? ''} required/>
+            <input type='text' name='firstName' onChange={handleLatinCheck} className={error.firstName ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше ім'я`} defaultValue={user?.name ?? ''} required/>
+            {error.firstName && <span className={css.errorText}>{error.firstName}</span>}
           </label>
           <label className={css.label}>{`Прізвище*`}
-            <input type='text' name='secondName' className={css.input} placeholder={`Ваше прізвище`} defaultValue={user?.lastName ?? ''} required/>
+            <input type='text' name='secondName' onChange={handleLatinCheck} className={error.secondName ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше прізвище`} defaultValue={user?.lastName ?? ''} required/>
+            {error.secondName && <span className={css.errorText}>{error.secondName}</span>}
           </label>
         </div>
           <label className={css.label}>{`Номер телефону*`}
@@ -43,13 +58,14 @@ export default function UserInfoForm() {
           </label>
         <div className={css.outerWrapper}>
           <label className={css.label}>{`Місто доставки*`}
-            <input type='text' name='city' className={css.input} placeholder={`Ваше місто`} defaultValue={user?.city ?? ''} required/>
+            <input type='text' name='city' onChange={handleLatinCheck} className={error.city ? `${css.input} ${css.inputError}` : css.input} placeholder={`Ваше місто`} defaultValue={user?.city ?? ''} required/>
+            {error.city && <span className={css.errorText}>{error.city}</span>}
           </label>
           <label className={css.label}>{`Номер відділення Нової Пошти*`}
             <input type='text' name='post' className={css.input} placeholder={`1`} defaultValue={user?.postOffice ?? ''} required/>
           </label>
         </div>
-        <button type='submit' className={css.button}>Зберегти зміни</button>
+        <button type='submit' className={css.button} disabled={hasErrors}>Зберегти зміни</button>
       </form>
     </div>
   </section>;
