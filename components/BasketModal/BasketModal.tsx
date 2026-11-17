@@ -17,6 +17,15 @@ export default function BasketModal() {
     setIsMounted(true);
   }, []);
 
+  useEffect(() => {
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, []);
+
   const handleClose = useCallback(() => {
     router.back();
   }, [router]);

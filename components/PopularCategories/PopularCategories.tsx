@@ -44,7 +44,7 @@ export default function PopularCategories() {
   }, []);
 
   return (
-    <section className={css.popularCategories}>
+    <section id="categories" className={css.popularCategories}>
       <div className={css.header}>
         <h2 className={css.title}>Популярні категорії</h2>
         <Link className={css.link} href="/categories">

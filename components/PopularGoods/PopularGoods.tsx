@@ -76,11 +76,6 @@ export default function PopularGoods() {
     const swiper = swiperRef.current;
     if (!swiper) return;
 
-    if (!swiper.isEnd) {
-      swiper.slideNext();
-      return;
-    }
-
     if (hasMore && !isLoading) {
       const isLoaded = await loadGoods(
         Math.floor(goods.length / PAGE_SIZE) + 1,
@@ -89,7 +84,10 @@ export default function PopularGoods() {
       if (isLoaded) {
         requestAnimationFrame(() => swiperRef.current?.slideNext());
       }
+      return;
     }
+
+    swiper.slideNext();
   };
 
   return (
