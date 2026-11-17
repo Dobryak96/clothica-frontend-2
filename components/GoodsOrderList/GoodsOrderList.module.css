@@ -1,3 +1,256 @@
-.goodsOrderList {
+.containerList {
   width: 100%;
+  background-color: var(--color-background);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 16px auto;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.image {
+  width: 82px;
+  height: 101px;
+  border-radius: 16px;
+  border: none;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.detailsWrapper {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+  margin-left: 16px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title:hover {
+  white-space: normal;
+  text-overflow: visible;
+}
+
+.subtitle {
+  font-size: 14px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.rating,
+.reviews {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 2px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: -34px;
+  padding-left: 98px;
+  gap: 12px;
+}
+
+.price {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0;
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.quantityInput {
+  background-color: var(--color-background);
+  width: 64px;
+ height: 40px;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.quantityInput::-webkit-outer-spin-button,
+.quantityInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.removeBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.removeBtn:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.summary {
+  margin-top: 24px;
+  padding-top: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.summaryValue {
+  font-weight: 400;
+  font-size: 15px;
+  text-align: right;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.formatRow {
+  font-size: 16px;
+}
+
+
+@media screen and (min-width: 375px) {
+  .list {
+    gap: 24px;
+    margin: 20px auto;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+
+  .summaryValue {
+    font-size: 16px;
+  }
+
+  .totalRow {
+    font-size: 18px;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .item {
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 101px;
+  }
+
+  .detailsWrapper {
+    align-items: center;
+    height: 72px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: auto;
+    flex-shrink: 0;
+    margin-top: 0;
+    padding-left: 0;
+    gap: 8px;
+  }
+
+  .price {
+    justify-content: flex-end;
+    margin-right: 32px;
+  }
+
+  .actions {
+    width: auto;
+    gap: 8px;
+  }
+}
+
+
+@media screen and (min-width: 1440px) {
+  .detailsWrapper {
+    margin-left: 32px;
+    margin-right: 24px;
+  }
+
 }
