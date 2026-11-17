@@ -11,6 +11,7 @@ import { getUserOrders } from '@/lib/api/userOrdersApi';
 import { OrderProps } from '@/types/orderList';
 import Loader from '@/components/Loader/Loader';
 import { useAuthStore } from '@/lib/store/authStore';
+import { useCartStore } from '@/lib/store/cartStore';
 import { toast } from 'sonner';
 
 export default function ProfileClientPage() {
@@ -20,6 +21,7 @@ export default function ProfileClientPage() {
   const [orders, setOrders] = useState<OrderProps[]>([])
   const router = useRouter();
   const clearUser = useAuthStore((state) => state.clearUser);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -48,6 +50,7 @@ export default function ProfileClientPage() {
       toast.error('Сесія вже завершена');
     }
     clearUser();
+    clearCart();
     router.push('/');
   };
 
