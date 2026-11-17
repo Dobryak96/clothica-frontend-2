@@ -4,6 +4,7 @@ import Link from "next/link";
 import Icon from "@/components/Icon/Icon";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useCartStore } from "@/lib/store/cartStore";
 import { usePathname } from "next/navigation";
 
 import { useAuthStore } from "@/lib/store/authStore";
@@ -18,7 +19,9 @@ export default function Header() {
   const burgerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const cartCount = 0;
+  const cartCount = useCartStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0),
+  );
   const pathname = usePathname();
 
   // Close menu and optionally restore focus to burger button
@@ -197,7 +200,7 @@ export default function Header() {
                 setIsMenuOpen(true);
               }
             }}
-            aria-label={isMenuOpen ? "Menu Open" : "Menu is close"}
+            aria-label={isMenuOpen ? "Закрити меню" : "Відкрити меню"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
           >
@@ -208,7 +211,7 @@ export default function Header() {
           <Link
             href="/basket"
             className={css.cart}
-            aria-label={`Кошик, товарів: ${cartCount}`}
+            aria-label={`Відкрити кошик, товарів: ${cartCount}`}
             onClick={() => closeMenu()}
           >
             <Icon name="shopping-cart" size={24} />
