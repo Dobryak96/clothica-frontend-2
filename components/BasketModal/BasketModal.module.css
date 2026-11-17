@@ -1,3 +1,154 @@
-.basketModal {
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end
+}
+
+.backdropModal {
+  position: relative;
+  z-index: 1001;
+  background-color: var(--color-background);
+  width: 100%;
+  min-width: 320px;
+  max-height: 100vh;
+  padding: 20px 16px 24px;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+}
+
+.title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 32px;
+  line-height: 1.2;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.continiueBtn,
+.orderBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 44px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--color-text);
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.orderBtn {
+  background-color: var(--color-primary);
+}
+
+.continiueBtn:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.orderBtn:hover {
+  background-color: #9DB484;
+}
+
+
+@media screen and (min-width: 375px) {
+  .backdropModal {
+    width: 375px;
+    padding: 24px 20px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .backdropModal {
+    width: 520px;
+    max-height: 85vh;
+    padding: 32px 40px 24px 32px;
+  }
+
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .buttons {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 36px;
+  }
+
+  .continiueBtn,
+  .orderBtn {
+    flex: 1;
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .backdropModal {
+    width: 589px;
+    max-height: 80vh;
+    padding: 40px 64px 16px 32px;
+  }
+
+  .title {
+    font-size: 58px;
+  }
+
+  .buttons {
+    gap: 24px;
+  }
+
+  .continiueBtn,
+  .orderBtn {
+    flex: none;
+    width: 234.5px;
+  }
 }

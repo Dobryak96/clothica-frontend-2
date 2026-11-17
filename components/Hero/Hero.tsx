@@ -20,18 +20,13 @@ export default function Hero() {
           </p>
 
           {/* Hero Actions */}
+
           <div className={css.heroActions}>
-            <Link
-              href="/goods"
-              className={`btn btn-primary ${css.primaryButton}`}
-            >
+            <Link href="#goods" className="btn btn-primary">
               До товарів
             </Link>
 
-            <Link
-              href="/categories"
-              className={`btn btn-secondary ${css.secondaryButton}`}
-            >
+            <Link href="#categories" className="btn btn-secondary">
               Дослідити категорії
             </Link>
           </div>
