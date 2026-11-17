@@ -1,26 +1,47 @@
 .ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   width: 100%;
 }
-.h1 {
-  font-size: 20px;
+
+.order {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 130px;
+  column-gap: 12px;
+  align-items: start;
 }
-.generalWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
+
+.cell {
+  min-width: 0;
 }
-.outerWrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
+
+.date {
+  font-size: 14px;
+  line-height: 1.5;
 }
-.innerWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
+
+.number {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
-.bigText {
-  font-weight: 400;
+
+.label {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.value {
   font-size: 16px;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 768px) {
+  .order {
+    grid-template-columns: 250px 200px minmax(0, 1fr);
+    column-gap: 16px;
+  }
 }

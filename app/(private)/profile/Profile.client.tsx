@@ -56,6 +56,7 @@ export default function ProfileClientPage() {
       <h1 className="pageTitle">Кабінет</h1>
       <div className={css.wrapper}>
         <div className={css.itemA}>
+        <h2 className={css.ordersTitle}>Мої замовлення</h2>
         {isLoading ? <Loader /> :
           isError ? <h2 className={css.error}>Виникла помилка при спробі завантажити ваші закази</h2> :
           !isEmpty ? <OrdersList orders={orders} /> :

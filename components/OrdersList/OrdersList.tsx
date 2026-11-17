@@ -1,30 +1,32 @@
 import { OrderListProps, OrderProps } from '@/types/orderList';
 import css from './OrdersList.module.css';
 
-export default function OrdersList({orders}: OrderListProps) {
+const STATUS_LABELS: Record<string, string> = {
+  pending: 'У процесі',
+  processing: 'Комплектується',
+  completed: 'Виконано',
+  cancelled: 'Скасовано',
+};
+
+export default function OrdersList({ orders }: OrderListProps) {
   return (
-    <section className={css.ordersList}>
-    <div className={css.generalWrapper}>
-      <h1 className={css.h1}>Мої замовлення</h1>
-        <div className={css.outerWrapper}>
-          {orders.map((order: OrderProps) => (
-            <div key={order._id}>
-        <div className={css.innerWrapper}>
-          <p>{new Date(order.createdAt).toLocaleDateString('uk-UA')}</p>
-          <p className={css.bigText}>{order.number}</p>
-        </div>
-        <div className={css.innerWrapper}>
-          <p className={css.bigText}>Сума</p>
-          <p>{order.total} грн</p>
-        </div>
-        <div className={css.innerWrapper}>
-          <p className={css.bigText}>Статус</p>
-          <p>{order.status}</p>
-              </div>
-            </div>
-            ))}
-      </div>
-    </div>
-  </section>
-  )
+    <ul className={css.ordersList}>
+      {orders.map((order: OrderProps) => (
+        <li key={order._id} className={css.order}>
+          <div className={css.cell}>
+            <p className={css.date}>{new Date(order.createdAt).toLocaleDateString('uk-UA')}</p>
+            <p className={css.number}>№{order.number}</p>
+          </div>
+          <div className={css.cell}>
+            <p className={css.label}>Сума:</p>
+            <p className={css.value}>{order.total} грн</p>
+          </div>
+          <div className={css.cell}>
+            <p className={css.label}>Статус:</p>
+            <p className={css.value}>{STATUS_LABELS[order.status] ?? order.status}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
 }
