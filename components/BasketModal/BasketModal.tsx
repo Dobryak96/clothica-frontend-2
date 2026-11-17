@@ -93,8 +93,8 @@ export default function BasketModal() {
           </>
         ) : (
           <MessageNoInfo
-            message="Ваш кошик порожній"
-            buttonText="Продовжити покупки"
+            message="Ваш кошик порожній, мершій до покупок!"
+            buttonText="До покупок"
             onClick={() => handleNavigate('/goods')}
           />
         )}

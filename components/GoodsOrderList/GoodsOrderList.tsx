@@ -1,15 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useCartStore } from "@/lib/store/cartStore";
 import css from "./GoodsOrderList.module.css";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 
 export default function GoodsOrderList() {
   const { items, updateQuantity, removeItem } = useCartStore();
   const [isMounted, setIsMounted] = useState(false);
-  const pathname = usePathname();
-  const isOrderPage = pathname === "/order";
 
   useEffect(() => {
     setIsMounted(true);
@@ -20,8 +18,6 @@ export default function GoodsOrderList() {
     (sum, item) => sum + (item.price?.value ?? 0) * item.quantity,
     0,
   );
-
-  const isFreeDelivery = subtotal >= 10000;
 
   const total = subtotal;
 
@@ -36,12 +32,20 @@ export default function GoodsOrderList() {
             key={`${item._id}-${item.size || "default"}`}
             className={css.item}
           >
-            <img src={item.image} alt={item.name} className={css.image} />
+            <Image
+              src={item.image}
+              alt={item.name}
+              width={82}
+              height={101}
+              className={css.image}
+            />
 
             <div className={css.detailsWrapper}>
               <div className={css.info}>
                 <h3 className={css.title}>{item.name}</h3>
-                <p className={css.subtitle}>Clothica</p>
+                {item.size && (
+                  <p className={css.subtitle}>Розмір: {item.size}</p>
+                )}
                 <div className={css.meta}>
                   <span className={css.rating}>
                     <svg className={css.icon} width="16" height="16">
@@ -103,9 +107,7 @@ export default function GoodsOrderList() {
 
         <div className={css.summaryRow}>
           <span>Доставка</span>
-          {(!isOrderPage || isFreeDelivery) && (<span className={css.summaryValue}>
-            {isFreeDelivery ? "Безкоштовна" : "За тарифами перевізника"}
-          </span>)}
+          <span className={css.summaryValue}>За тарифами перевізника</span>
         </div>
 
         <div className={css.totalRow}>

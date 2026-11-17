@@ -58,9 +58,7 @@
 }
 
 .subtitle {
-  display: none;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
 }
 
 .meta {
@@ -83,7 +81,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: -54px;
+  margin-top: -34px;
   padding-left: 98px;
   gap: 12px;
 }
@@ -223,11 +221,6 @@
   }
 
   .title {
-    font-size: 18px;
-  }
-
-  .subtitle {
-    display: block;
     font-size: 18px;
   }
 
