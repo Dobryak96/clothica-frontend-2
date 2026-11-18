@@ -24,11 +24,13 @@ const MessageNoInfo = MessageNoInfoRaw as React.ComponentType<MessageNoInfoProps
 interface GoodReviewsProps {
   reviews?: Review[];
   productId: string;
+  onReviewCreated?: () => void;
 }
 
 export const GoodReviews: React.FC<GoodReviewsProps> = ({
   reviews: initialReviews = [],
   productId,
+  onReviewCreated,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
@@ -96,6 +98,7 @@ export const GoodReviews: React.FC<GoodReviewsProps> = ({
           onReviewCreated={() => {
             setIsModalOpen(false);
             fetchReviews();
+            onReviewCreated?.();
           }}
         />
       )}

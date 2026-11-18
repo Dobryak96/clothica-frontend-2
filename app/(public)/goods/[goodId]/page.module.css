@@ -1,40 +1,19 @@
-/* ==========================================
-   1. MOBILE FIRST (от 375px и выше)
-   ========================================== */
 .page {
     display: flex;
     flex-direction: column;
     gap: 80px;
-    max-width: 1440px;
-    margin: 0 auto;
     padding-top: 40px;
     padding-bottom: 80px;
 }
 
-
-/* ==========================================
-   2. TABLET (от 768px)
-   ========================================== */
 @media (min-width: 768px) {
     .page {
         gap: 32px;
-        padding-left: 32px;
-        padding-right: 32px;
-        max-width: 1024px;
-        /* Разрешаем контейнеру расти до 1024px на планшетах */
     }
 }
 
-
-/* ==========================================
-   3. DESKTOP (от 1440px)
-   ========================================== */
 @media (min-width: 1440px) {
     .page {
         gap: 48px;
-        padding-left: 48px;
-        padding-right: 48px;
-        max-width: 1400px;
-        /* Широкий десктоп */
     }
 }

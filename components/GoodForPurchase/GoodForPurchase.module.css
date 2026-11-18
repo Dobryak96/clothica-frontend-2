@@ -67,6 +67,18 @@
   color: #999;
 }
 
+.breadcrumbLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover,
+.breadcrumbLink:focus-visible {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
 
 .breadcrumbCurrent {
   font-weight: 600;
