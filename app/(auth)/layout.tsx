@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Footer from '@/components/Footer/Footer';
+import css from './layout.module.css';
 
 type LayoutProps = {
   children: ReactNode;
@@ -8,14 +9,14 @@ type LayoutProps = {
 
 export default function AuthLayout({ children }: LayoutProps) {
   return (
-    <>
-      <header className="container">
+    <div className={css.layout}>
+      <header className={`container ${css.header}`}>
         <p>
           <Link href="/">Clothica</Link>
         </p>
       </header>
-      <main className="container">{children}</main>
-    <Footer compact/>
-    </>
+      <main className={`container ${css.main}`}>{children}</main>
+      <Footer compact />
+    </div>
   );
 }

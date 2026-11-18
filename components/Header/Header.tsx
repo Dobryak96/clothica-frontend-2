@@ -19,9 +19,7 @@ export default function Header() {
   const burgerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const cartCount = useCartStore((state) =>
-    state.items.reduce((total, item) => total + item.quantity, 0),
-  );
+  const cartCount = useCartStore((state) => state.items.length);
   const pathname = usePathname();
 
   // Close menu and optionally restore focus to burger button

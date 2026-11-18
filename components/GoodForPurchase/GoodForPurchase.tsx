@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MAX_QUANTITY, useCartStore } from "@/lib/store/cartStore";
 import type { Good } from "@/types/good";
@@ -67,7 +68,7 @@ export default function GoodForPurchase({ good }: { good: Good }) {
       <div className={styles.infoContainer}>
         {/* Хлібні крошки (з жирним останнім елементом) */}
         <div className={styles.breadcrumbs}>
-          <span>{categoryName}</span>
+          <Link href="/goods" className={styles.breadcrumbLink}>{categoryName}</Link>
           <span className={styles.breadcrumbSeparator}>&gt;</span>
           <span className={styles.breadcrumbCurrent}>{name}</span>
         </div>

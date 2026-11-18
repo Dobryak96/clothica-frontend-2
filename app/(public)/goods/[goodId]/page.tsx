@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, useCallback, use } from 'react';
 import GoodForPurchase from '@/components/GoodForPurchase/GoodForPurchase';
 import GoodReviews from '@/components/GoodReviews/GoodReviews';
 import type { Good } from '@/types/good';
@@ -19,22 +19,22 @@ export default function GoodPage({ params }: GoodPageProps) {
   const [good, setGood] = useState<Good | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    async function fetchGood() {
-      try {
-        const response = await fetch(`/api/goods/${goodId}`);
-        if (!response.ok) throw new Error('Failed to fetch good');
-        const data = await response.json();
-        setGood(data);
-      } catch {
-        setGood(null);
-      } finally {
-        setLoading(false);
-      }
+  const fetchGood = useCallback(async () => {
+    try {
+      const response = await fetch(`/api/goods/${goodId}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Failed to fetch good');
+      const data = await response.json();
+      setGood(data);
+    } catch {
+      setGood(null);
+    } finally {
+      setLoading(false);
     }
-
-    fetchGood();
   }, [goodId]);
+
+  useEffect(() => {
+    fetchGood();
+  }, [fetchGood]);
 
   if (loading) {
     return <div style={{ padding: '40px', textAlign: 'center' }}>Завантаження товару...</div>;
@@ -46,11 +46,11 @@ export default function GoodPage({ params }: GoodPageProps) {
 
   return (
     <main style={{ paddingBottom: "60px" }}>
-      <div className={styles.page}>
+      <div className={`container ${styles.page}`}>
         <GoodForPurchase good={good} />
 
       <div className={styles.reviewsSectionWrapper}>
-  <GoodReviews productId={goodId} />
+  <GoodReviews productId={goodId} onReviewCreated={fetchGood} />
 </div>
       </div>
     </main>
