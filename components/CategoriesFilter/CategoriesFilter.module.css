@@ -49,6 +49,7 @@
   background-color: var(--color-background);
   border: 1px solid var(--color-primary-light);
   border-radius: 20px;
+  transition: border-color 0.3s ease;
 }
 
 .toggle {
@@ -81,6 +82,10 @@
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #4b5d3a var(--color-primary);
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.3s ease;
 }
 
 .panel::-webkit-scrollbar {
@@ -105,6 +110,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-height: 0;
 }
 
 @media screen and (min-width: 768px) {
